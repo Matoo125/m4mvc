@@ -1,0 +1,13 @@
+{
+    "name": "m4/m4mvc",
+    "description": "Simple php framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matej",
+            "email": "vrzala.matej@gmail.com"
+        }
+    ],
+    "require": {}
+}
