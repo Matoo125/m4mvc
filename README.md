@@ -1,6 +1,6 @@
 ## M4 Framework MVC
 
-```
+```php
 <?php
 
 use m4\m4mvc\core;
