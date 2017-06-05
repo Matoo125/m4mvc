@@ -50,6 +50,15 @@ class App
 		$this->callMethod($url);
 	}
 
+	public function db(array $credentials, string $namespace = null) {
+		Model::$credentials = $credentials;
+		if ($namespace) {
+			Controller::$modelNamespace = $namespace;
+		} else {
+			Controller::$modelNamespace = $this->settings['namespace'] . '\\model\\';
+		}
+	}
+
 	private function checkControllerFolder() {
 		// check controllers folder
 		if (!file_exists($this->paths['controllers'])) {
@@ -86,6 +95,9 @@ class App
 		}
 	}
 
+	/* 	
+	 * 	Set module from first url param
+	 */
 	private function setModule($url)
 	{
 		$this->checkControllerFolder();
@@ -97,10 +109,14 @@ class App
 		return $url;
 	}
 
+	/*
+	 *	Create instance of controller
+	 *	use default or take from url
+	 */
 	private function instantiateController($url)
 	{ 
 		// check if controller exists
-		if ($url && file_exists($this->path['controllers'] . DS . 
+		if ($url && file_exists($this->paths['controllers'] . DS . 
 								$this->module . DS . 
 								ucfirst($url[0]) . '.php')) {
 
@@ -116,6 +132,10 @@ class App
 		return $url;
 	}
 
+	/*
+	 * 	Call method of controller
+	 * 	and pass parameters
+	 */
 	private function callMethod($url)
 	{
 		// set the method if exists
