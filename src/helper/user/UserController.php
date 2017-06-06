@@ -3,6 +3,7 @@ namespace m4\m4mvc\helper\user;
 
 use m4\m4mvc\helper\Redirect;
 use m4\m4mvc\core\Controller;
+use m4\m4mvc\helper\Session;
 
 class UserController extends Controller 
 {

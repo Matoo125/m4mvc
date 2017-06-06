@@ -14,7 +14,7 @@ Then:
 ```php
 <?php
 
-use m4\m4mvc\core;
+use m4\m4mvc\core\App;
 
 require_once('vendor/autoload.php');
 
