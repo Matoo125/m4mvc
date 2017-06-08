@@ -58,7 +58,7 @@ abstract class Model
     // To insert or update record
     // retuns boolean
     // return lastinserted id if type is 1
-    public function save(string $query, array $params = null, boolean $lastInsertedId = null)
+    public function save(string $query, array $params = null, bool $lastInsertedId = null)
     {
       if ($lastInsertedId) {
         return self::runQuery($query, $params, 4);

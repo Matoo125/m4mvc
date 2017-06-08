@@ -11,6 +11,8 @@ class Controller
 	protected $view = null;
 	// Data to be passed
 	protected $data = [];
+	// Static response
+	public static $response = [];
 
 	public function getModel($name)
 	{
@@ -34,6 +36,7 @@ class Controller
 	public function json()
 	{
 		header('Content-Type: application/json');
-		echo json_encode($this->data);
+		echo json_encode(array_merge($this->data, self::$response));
 	}
+	
 }

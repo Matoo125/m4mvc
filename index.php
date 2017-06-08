@@ -20,6 +20,7 @@ require_once('tmp/model/Test.php');
 
 $app = new m4\m4mvc\core\App;
 
+session_start();
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__));

@@ -1,6 +1,8 @@
 <?php 
 namespace m4\m4mvc\core;
 
+use m4\m4mvc\helper\Request;
+
 /*
  * This is the framework's brain
  * 1. URL is parsed
@@ -42,6 +44,9 @@ class App
 
 		// set the current module
 		$url = $this->setModule($url);
+
+		// handle request
+		$request = Request::handle();
 
 		// create instance of controller
 		$url = $this->instantiateController($url);

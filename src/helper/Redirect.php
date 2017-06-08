@@ -15,8 +15,10 @@ class Redirect
         header("Location: " . $url);
         exit();
     }
+
+    // redirect to url from url object
     public static function toURL($key)
     {
-      return self::to(Strings::getUrl($key));
+      return self::to(Str::getUrl($key));
     }
 }

@@ -32,3 +32,6 @@ $app->run();
 ```
 
 Or check `index.php` and `/tmp` for better example.
+
+
+Everything important lives in `/src` directory. 
