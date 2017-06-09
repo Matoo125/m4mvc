@@ -15,13 +15,13 @@ class Response
 
 	public static function error ($message, $extra = [])
 	{
-		self::create('error', $message, $extra);
+		self::create('ERROR', $message, $extra);
 
 	}
 
 	public static function success ($message, $extra = [])
 	{
-		self::create('success', $message, $extra);
+		self::create('SUCCESS', $message, $extra);
 	}
 
 	public static function create ($status, $message = null, $extra = []) 

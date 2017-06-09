@@ -11,8 +11,8 @@ class UserModel extends Model
 	public static $table = 'users';
 
 	public function getByEmail($email, $items = '*') {
-	    $sql = 'SELECT '.$items.' FROM users WHERE email = :email';
-	    return $this->fetch($sql, ['email' => $email]);
+		$query = $this->query->select($items)->from(self::$table)->where('email = :email')->build();
+	    return $this->fetch($query, ['email' => $email]);
 	}
 
 	public function register($data)

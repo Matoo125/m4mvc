@@ -1,11 +1,11 @@
 <?php 
 namespace m4\m4mvc\helper\user;
 
-use m4\m4mvc\helper\Redirect;
 use m4\m4mvc\core\Controller;
-use m4\m4mvc\helper\Session;
+use m4\m4mvc\helper\Redirect;
 use m4\m4mvc\helper\Request;
 use m4\m4mvc\helper\Response;
+use m4\m4mvc\helper\Session;
 
 class UserController extends Controller 
 {
@@ -43,7 +43,7 @@ class UserController extends Controller
 	    Session::set('user_id', $user['id']);
 	    Response::success(
 	    	'You are logged in. ', 
-	    	['user'=>array_diff_key($user, array_flip(['password']))]
+	    	['user'=>array_diff_key($user, array_flip(['password']))] // return user array without password
 	    );
 
 	}
@@ -90,7 +90,11 @@ class UserController extends Controller
 
 	public function is_logged_in () 
 	{
-	  Response::create(Session::get('user_id'));
+		if (Session::get('user_id')) {
+			Response::success('You are logged in!', ['id' => Session::get('user_id')]);
+		} else {
+			Response::error('You are not logged in!');
+		}
 	}
 
 }
