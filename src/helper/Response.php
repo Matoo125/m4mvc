@@ -15,6 +15,7 @@ class Response
 
 	public static function error ($message, $extra = [])
 	{
+		http_response_code(400);
 		self::create('ERROR', $message, $extra);
 
 	}

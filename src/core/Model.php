@@ -73,7 +73,7 @@ abstract class Model
     }
 
     // Fetch multiple rows
-    public function fetchAll($query, $params)
+    public function fetchAll($query, $params = [])
     {
       return self::runQuery($query, $params, 2);
     }
