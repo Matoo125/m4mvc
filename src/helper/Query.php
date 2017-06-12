@@ -20,6 +20,8 @@ class Query
     private $limit;
     private $join;
     private $groupBy;
+    private $orderBy = array();
+
     public function select()
     {
         $this->columns = func_get_args();
@@ -81,6 +83,11 @@ class Query
       $this->groupBy = $by;
       return $this;
     }
+    public function orderBy($what, $how)
+    {
+      array_push($this->orderBy, $what . " " . $how);
+      return $this;
+    }
     public function build()
     {
       if (!$this->table){
@@ -115,6 +122,11 @@ class Query
             $query .= " GROUP BY ";
             $query .= $this->groupBy;
             $this->groupBy = null;
+          }
+          if (!empty($this->orderBy)) {
+            $query .= " ORDER BY ";
+            $query .= implode(', ', $this->orderBy) . ' ';
+            $this->orderBy = [];
           }
           return $query;
           break;
