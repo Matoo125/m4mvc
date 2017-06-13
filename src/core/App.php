@@ -21,6 +21,7 @@ class App
 	// other settings
 	public $settings = [
 		'viewExtension'	=>	'php',
+		'renderFunction' => 'render',
 		'namespace'		=>	'app'
 	];
 	// Module [or folder] to be used to find controller
@@ -169,12 +170,12 @@ class App
 		switch ($status) {
 			case 200:
 				// module/controller/method
-				$view = $this->module . DS .
-						lcfirst(substr(strchr(get_class($this->instance), '\\'), 1)) . DS . 
-						$this->method;
+				$view = $this->module . DS . lcfirst($this->controller) . DS .  $this->method;
 				$viewPath = $this->paths['views'] . DS . $view . '.' . $this->settings['viewExtension'];
 				if (file_exists($viewPath)) {
-					call_user_func_array([$this->instance, 'view'], [$view]);
+					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$view . '.' . $this->settings['viewExtension']]);
+				} else {
+					echo 'view: ' . $view . ' could not be found';
 				}
 				break;
 			case 'json': 
@@ -184,5 +185,11 @@ class App
 				echo '404 page not found';
 				break;
 		}
+	}
+
+	public function useTwig () 
+	{
+		$this->settings['viewExtension'] = 'twig';
+		$this->settings['renderFunction'] = 'renderTwig';
 	}
 }
