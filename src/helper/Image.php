@@ -27,7 +27,7 @@ class Image
     // cut filename
     self::$name = substr($image['name'], 0, - strlen(self::$extension));
     // create slug
-    self::$name = Strings::slugify(self::$name);
+    self::$name = Str::slugify(self::$name);
     // join them again together
     $name = self::$name . "." . self::$extension;
     // append filename to the location
