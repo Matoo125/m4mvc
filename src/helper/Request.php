@@ -11,6 +11,8 @@ use m4\m4mvc\helper\Response;
 
 class Request
 {
+	public static $data = [];
+
 	public static function forceMethod ($types)
 	{
 		if (is_string($types)) {
@@ -30,8 +32,11 @@ class Request
 		return true;
 	}
 
-	public static function required ($data, $required)
+	public static function required ()
 	{
+		$required = func_get_args();
+		$data = self::$data;
+
 		$responseMessage = 'Required data not found ';
 		$extra = [
 			'data'	=>	$data,
@@ -55,14 +60,14 @@ class Request
 			case 'POST':
 				// get ajax json post data if request is empty
 				$_POST = !empty($_POST) ? $_POST : self::jsonPost();
+				self::$data = $_POST;
 				break;
 			
 			default:
-				# code...
+				self::$data = $_GET;
 				break;
-
-		return self::getRequestType();
 		}
+		return;
 	}
 
 	public static function getRequestType ()
@@ -74,4 +79,16 @@ class Request
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	} 
+
+	// select data from request
+	public static function select ()
+	{
+		$arr = [];
+		foreach (func_get_args() as $key => $value) {
+			if (array_key_exists($value, self::$data)) {
+				$arr[$value] = self::$data[$value];
+			}
+		}
+		return $arr;
+	}
 }

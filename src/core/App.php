@@ -34,6 +34,8 @@ class App
 	public $method = 'Index';
 	// Params to be passed to method
 	public $params = [];
+	// Type of response
+	public $response = 'view';
 
 	/** 
 	 *	Run the application 
@@ -156,7 +158,7 @@ class App
 			// call the method
 			call_user_func_array([$this->instance, $this->method], $this->params);
 
-			return $this->module == 'api' ? $this->callView('json') : $this->callView(200);
+			return $this->module == 'api' || $this->response == 'json' ? $this->callView('json') : $this->callView(200);
 		} else {
 			$error = 'Method: ' . $this->method . ' of controller: ' . $this->controller . ' does not exists';
 			throw new \Exception($error);
