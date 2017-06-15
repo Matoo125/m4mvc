@@ -28,7 +28,7 @@ class UserController extends Controller
 	public function login()
 	{
 		Request::forceMethod('post');
-		Request::required($_POST, ['email', 'password']);
+		Request::required('email', 'password');
 
 		$user = $this->model->getByEmail($_POST['email'], 'id, email, username, password ');
 
@@ -51,7 +51,7 @@ class UserController extends Controller
 	public function register () 
 	{
 		Request::forceMethod('post');
-		Request::required($_POST, ['username', 'email', 'password', 'passwordCheck']);
+		Request::required('username', 'email', 'password', 'passwordCheck');
 
 		$data['username'] 		=	$_POST['username'];
 		$data['email'] 			=	$_POST['email'];
