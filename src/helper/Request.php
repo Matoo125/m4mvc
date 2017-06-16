@@ -47,7 +47,7 @@ class Request
 		foreach ($required as $req) {
 			if (!isset($data[$req])) {
 				array_push($extra['missing'], $req);
-			} elseif (isset($data[$req]) && empty($data[$req])) {
+			} elseif (isset($data[$req]) && empty($data[$req]) && !is_bool($data[$req])) {
 				array_push($extra['empty'], $req);
 			}
 		}
