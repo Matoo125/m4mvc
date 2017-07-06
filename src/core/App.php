@@ -158,13 +158,16 @@ class App
 			// call the method
 			call_user_func_array([$this->instance, $this->method], $this->params);
 
-			return $this->module == 'api' || $this->response == 'json' ? $this->callView('json') : $this->callView(200);
+			return $this->module == 'api' || 
+						 $this->response == 'json' || 
+						 $this->paths['views'] === false ? 
+						 $this->callView('json') : 
+						 $this->callView(200);
 		} else {
 			$error = 'Method: ' . $this->method . ' of controller: ' . $this->controller . ' does not exists';
 			throw new \Exception($error);
 		}
 
-		return $this->callView(404);
 	}
 
 	private function callView($status)
