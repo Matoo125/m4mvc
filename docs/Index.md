@@ -4,9 +4,9 @@ M4MVC [Framework](https://en.wikipedia.org/wiki/Software_framework) is using as 
 
 There are 3 core files:
 
-- [App](app.md)
-- [Model](model.md)
-- [Controller](controller.md)
+- [App](core/app.md)
+- [Model](core/model.md)
+- [Controller](core/controller.md)
 
 
 And 7 helper files

@@ -2,6 +2,13 @@ site_name: M4MVC
 theme: material
 pages:
     - 'Introduction': 'index.md'
-    - 'App': 'core/app.md'
-    - 'Controller': 'core/controller.md'
-    - 'Model': 'core/model.md'
+    - 'Core':
+      - 'App': 'core/app.md'
+      - 'Controller': 'core/controller.md'
+      - 'Model': 'core/model.md'
+    - 'Helpers':
+      - 'String': 'helper/string.md'
+      - 'Query': 'helper/query.md'
+
+markdown_extensions:
+    - codehilite
