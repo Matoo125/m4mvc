@@ -2,8 +2,6 @@
 
 namespace m4\m4mvc\helper;
 
-use app\helper\Str;
-
 /*
  *  Redirect helper class
  *  handles redirect operations

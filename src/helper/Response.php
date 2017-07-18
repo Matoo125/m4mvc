@@ -13,8 +13,16 @@ class Response
 {
 	public static $response = [];
 
-	public static function error ($message, $extra = [])
+	public static $code = 200;
+
+	public static function code ($code) 
 	{
+		self::$code = $code;
+	}
+
+	public static function error ($message, $extra = [], $code = 404)
+	{
+		self::$code = $code;
 		self::create('ERROR', $message, $extra);
 	}
 
@@ -36,6 +44,7 @@ class Response
 	public static function json () 
 	{
 		header('Content-Type: application/json');
+		http_response_code(self::$code);
 		echo json_encode(self::$response);
 		exit();
 	}

@@ -1,20 +1,10 @@
 <?php 
 
-require_once('src/core/App.php');
-require_once('src/core/Controller.php');
-require_once('src/core/Model.php');
-
-require_once('src/helper/Str.php');
-require_once('src/helper/Query.php');
-require_once('src/helper/Redirect.php');
-require_once('src/helper/user/UserController.php');
-
+require_once('vendor/autoload.php');
 
 require_once('tmp/controllers/api/Home.php');
 require_once('tmp/controllers/api/Test.php');
 require_once('tmp/controllers/api/User.php');
-
-require_once('vendor/autoload.php');
 
 require_once('tmp/model/Test.php');
 

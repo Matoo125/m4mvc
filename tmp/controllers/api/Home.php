@@ -12,7 +12,7 @@ class Home extends Controller
 	{
 		if (!Request::forceMethod('get')) { return; }
 
-		if (!Request::required($_GET, ['name', 'age'])) { return; }
+		if (!Request::required('name', 'age')) { return; }
 
 		$this->data['location'] = 'home';
 
