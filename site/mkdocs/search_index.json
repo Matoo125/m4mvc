@@ -1,0 +1,94 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Introduction\n\n\nM4MVC \nFramework\n is using as the name suggests \nModel, View, Controller\n architecture. Main Framework functionality can be found in \napp/core\n folder, but there are also important \napp/helper\n methods and \nconfig\n files.\n\n\nThere are 3 core files:\n\n\n\n\nApp\n\n\nModel\n\n\nController\n\n\n\n\nAnd 7 helper files\n\n\n\n\nImage\n\n\nQuery\n\n\nRedirect\n\n\nRequest\n\n\nResponse\n\n\nSession\n\n\nStr\n\n\n\n\nThen there is also extra helper folder \nuser\n with can be used for fast and simple authentication system.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#introduction",
+            "text": "M4MVC  Framework  is using as the name suggests  Model, View, Controller  architecture. Main Framework functionality can be found in  app/core  folder, but there are also important  app/helper  methods and  config  files.  There are 3 core files:   App  Model  Controller   And 7 helper files   Image  Query  Redirect  Request  Response  Session  Str   Then there is also extra helper folder  user  with can be used for fast and simple authentication system.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/core/app/",
+            "text": "App\n\n\nm4\\m4mvc\\core\\App\n\n\nApp\n is the most important file of this application. It functions as a router: parses URL, creates instance of \nController\n, calls Method and matches View or just outputs JSON.\n\n\nStep by Step\n\n\n\n\nParse URL (create array from URL string received as \n$_GET['url']\n parameter).\n\n\n\n\n\n\nSo we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit\n\n\n\n\n\n\n\n\nSets Module, module is represented as folder in the controllers path, first parameter of URL, if not set default module will be used.\n\n\n\n\n\n\nInitializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.\n\n\n\n\n\n\nCalls Method, if not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.\n\n\n\n\n\n\nIf there are still some remaining parts of URL array, they will be passed as parameters to the method call and can be caught in method itself\n\n\n\n\n\n\nCalls view based on \nmodule/controller/method\n path in \napp/views\n folder\n\n\n\n\n\n\nURL\n\n\n\n\nmodule [default: api],[sets module to be used], [e.g: api, admin, web]\n\n\ncontroller [default: Home], [sets the controller to be initialized]\n\n\nmethod [default: Index], [sets the method to be called]\n\n\nparams [default: empty array], [parameters to be passed to method]\n\n\n\n\nAll those properties are set from url, but you can change their default value, before run call\n\n\nAPI\n\n\n\n\n\n\n\n\nname\n\n\ndefault value\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n$paths['controllers']\n\n\n\n\npath to your controllers\n\n\n\n\n\n\n$path['views']\n\n\nfalse\n\n\npath to view, if set to false, it will not look for a view and outputs json.\n\n\n\n\n\n\n$settings['viewExtension']\n\n\nphp\n\n\nused only if views are used, extension of a view file.\n\n\n\n\n\n\n$settings['renderFunction']\n\n\nrender\n\n\nrender function to be called (render, renderTwig), again only if views are used.\n\n\n\n\n\n\n$settings['namespace']\n\n\napp\n\n\nnamespace of your app\n\n\n\n\n\n\n\n\nAll those properties have to be set correctly before app is run .\n\n\nExample Requests\n\n\n\n\n\n\n\n\nRoute\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n/module/controller/method/param1/.../paramN\n\n\nIdeal URL Structure\n\n\n\n\n\n\n/admin/posts/edit/my-first-post\n\n\nCalls \nedit\n method with \nmy-first-post\n parameter of \nposts\n controller in \nadmin\n module and matches view.\n\n\n\n\n\n\n/api/posts/edit/my-second-post\n\n\nThe same as before, but \nreturns JSON\n\n\n\n\n\n\n/posts/edit-my-third-post\n\n\nThis one \nuses the default module [api]\n, so it does not have to be in url.\n\n\n\n\n\n\n/\n\n\nThis calls default module, default controller and default method with no parameters.",
+            "title": "App"
+        },
+        {
+            "location": "/core/app/#app",
+            "text": "m4\\m4mvc\\core\\App  App  is the most important file of this application. It functions as a router: parses URL, creates instance of  Controller , calls Method and matches View or just outputs JSON.",
+            "title": "App"
+        },
+        {
+            "location": "/core/app/#step-by-step",
+            "text": "Parse URL (create array from URL string received as  $_GET['url']  parameter).    So we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit     Sets Module, module is represented as folder in the controllers path, first parameter of URL, if not set default module will be used.    Initializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.    Calls Method, if not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.    If there are still some remaining parts of URL array, they will be passed as parameters to the method call and can be caught in method itself    Calls view based on  module/controller/method  path in  app/views  folder",
+            "title": "Step by Step"
+        },
+        {
+            "location": "/core/app/#url",
+            "text": "module [default: api],[sets module to be used], [e.g: api, admin, web]  controller [default: Home], [sets the controller to be initialized]  method [default: Index], [sets the method to be called]  params [default: empty array], [parameters to be passed to method]   All those properties are set from url, but you can change their default value, before run call",
+            "title": "URL"
+        },
+        {
+            "location": "/core/app/#api",
+            "text": "name  default value  description      $paths['controllers']   path to your controllers    $path['views']  false  path to view, if set to false, it will not look for a view and outputs json.    $settings['viewExtension']  php  used only if views are used, extension of a view file.    $settings['renderFunction']  render  render function to be called (render, renderTwig), again only if views are used.    $settings['namespace']  app  namespace of your app     All those properties have to be set correctly before app is run .",
+            "title": "API"
+        },
+        {
+            "location": "/core/app/#example-requests",
+            "text": "Route  Description      /module/controller/method/param1/.../paramN  Ideal URL Structure    /admin/posts/edit/my-first-post  Calls  edit  method with  my-first-post  parameter of  posts  controller in  admin  module and matches view.    /api/posts/edit/my-second-post  The same as before, but  returns JSON    /posts/edit-my-third-post  This one  uses the default module [api] , so it does not have to be in url.    /  This calls default module, default controller and default method with no parameters.",
+            "title": "Example Requests"
+        },
+        {
+            "location": "/core/controller/",
+            "text": "Controller\n\n\nm4\\m4mvc\\core\\Controller\n\n\nThis\n is \nAbstract\n Controller \nClass\n which is intended to be extended by every controller.\n\n\nYou might create your own base controller, which extends this controller.\n\n\nProperties\n\n\n\n\n\n\n\n\nname\n\n\ndescription\n\n\nnote\n\n\n\n\n\n\n\n\n\n\nmodel\n\n\nto store model object\n\n\n\n\n\n\n\n\nmodelNamespace\n\n\nname space to access model\n\n\nThis can be set in App->db function\n\n\n\n\n\n\nview\n\n\npath to view\n\n\nuse this if you do not want default module/controller/method path\n\n\n\n\n\n\ndata\n\n\nData to be passed to view or outputted\n\n\n[]\n\n\n\n\n\n\nresponse\n\n\nStatic version of data\n\n\nThis is used by Response helper\n\n\n\n\n\n\n\n\nUsage\n\n\nAll those calls should be made from controller which extends this.\n\n\nTo set controller\n\n\n$this->model = $this->getModel('Name')\n// for this to work modelNamespace has to be set\n\n\n\n\nSet data\n\n\n$this->data['key'] = 'value';\n\n\n\n\nRendering\n\n\nThere are 3 default render functions. render, renderTwig and json.\n\n\n\n\njson outputs pure json from data + response arrays\n\n\nrenderTwig renders twig file \n\n\nrender is for pure PHP view\n\n\n\n\nyou can write your own render function by creating your own base controller and then passing function name to $app->settings['renderFunction']",
+            "title": "Controller"
+        },
+        {
+            "location": "/core/controller/#controller",
+            "text": "m4\\m4mvc\\core\\Controller  This  is  Abstract  Controller  Class  which is intended to be extended by every controller.  You might create your own base controller, which extends this controller.",
+            "title": "Controller"
+        },
+        {
+            "location": "/core/controller/#properties",
+            "text": "name  description  note      model  to store model object     modelNamespace  name space to access model  This can be set in App->db function    view  path to view  use this if you do not want default module/controller/method path    data  Data to be passed to view or outputted  []    response  Static version of data  This is used by Response helper",
+            "title": "Properties"
+        },
+        {
+            "location": "/core/controller/#usage",
+            "text": "All those calls should be made from controller which extends this.  To set controller  $this->model = $this->getModel('Name')\n// for this to work modelNamespace has to be set  Set data  $this->data['key'] = 'value';",
+            "title": "Usage"
+        },
+        {
+            "location": "/core/controller/#rendering",
+            "text": "There are 3 default render functions. render, renderTwig and json.   json outputs pure json from data + response arrays  renderTwig renders twig file   render is for pure PHP view   you can write your own render function by creating your own base controller and then passing function name to $app->settings['renderFunction']",
+            "title": "Rendering"
+        },
+        {
+            "location": "/core/model/",
+            "text": "Model\n\n\nm4\\m4mvc\\core\\Model\n\n\nAbstract model class\n is intended to be extended by all the other models.\n\n\nParameters\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nquery\n\n\nHolds Query Helper Instance\n\n\n\n\n\n\ndb\n\n\nHolds database connection\n\n\n\n\n\n\n\n\nTalking With Database\n\n\nThere are 4 important helper methods to run SQL queries. \n\n\n\n\nsave  - insert / update / delete record\n\n\n\n\n\n\nSave method has third optional argument \nlastInsertedId\n which if set to \ntrue\n returns last inserted id. Otherwise it returns boolean of success.\n\n\n\n\n\n\n\n\nfetch - get single row\n\n\n\n\n\n\nfetchAll - get array of results\n\n\n\n\n\n\nrunQuery - run the query\n\n\n\n\n\n\n\n\nFirst 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments \nSQL Query\n and \nArray of Parameters\n. \n\n\n\n\nIf you want to use runQuery directly you need to set third parameter \ntype\n [integer]. \n\n\n\n\n\n\n\n\ntype\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n1\n\n\nFetch All [Assoc]\n\n\n\n\n\n\n2\n\n\nFetch [Assoc]\n\n\n\n\n\n\n3\n\n\nCreate Update Delete returns boolean\n\n\n\n\n\n\n4\n\n\nCreate Update Delete returns last inserted id\n\n\n\n\n\n\n\n\nOther core methods\n\n\nimage\n (received image \n, folder to upload \n)\n\n\nThis method is storing image records in \nimages table\n and it also calls \nImage::upload\n helper to upload the image.\n\n\nIt returns last inserted id or null if it fails.\n\n\n\n\ncountTable\n (table to count *, where clause, like clause)\n\n\nThis method counts number of records from table and you can use where or like clause to filter the results.\n\n\nReturns number of rows or null.",
+            "title": "Model"
+        },
+        {
+            "location": "/core/model/#model",
+            "text": "m4\\m4mvc\\core\\Model  Abstract model class  is intended to be extended by all the other models.",
+            "title": "Model"
+        },
+        {
+            "location": "/core/model/#parameters",
+            "text": "Name  Description      query  Holds Query Helper Instance    db  Holds database connection",
+            "title": "Parameters"
+        },
+        {
+            "location": "/core/model/#talking-with-database",
+            "text": "There are 4 important helper methods to run SQL queries.    save  - insert / update / delete record    Save method has third optional argument  lastInsertedId  which if set to  true  returns last inserted id. Otherwise it returns boolean of success.     fetch - get single row    fetchAll - get array of results    runQuery - run the query     First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments  SQL Query  and  Array of Parameters .    If you want to use runQuery directly you need to set third parameter  type  [integer].      type  description      1  Fetch All [Assoc]    2  Fetch [Assoc]    3  Create Update Delete returns boolean    4  Create Update Delete returns last inserted id",
+            "title": "Talking With Database"
+        },
+        {
+            "location": "/core/model/#other-core-methods",
+            "text": "image  (received image  , folder to upload  )  This method is storing image records in  images table  and it also calls  Image::upload  helper to upload the image.  It returns last inserted id or null if it fails.   countTable  (table to count *, where clause, like clause)  This method counts number of records from table and you can use where or like clause to filter the results.  Returns number of rows or null.",
+            "title": "Other core methods"
+        }
+    ]
+}
