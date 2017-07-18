@@ -1,6 +1,7 @@
 site_name: M4MVC
+theme: material
 pages:
     - 'Introduction': 'index.md'
-    - 'App': 'app.md'
-    - 'Controller': 'controller.md'
-    - 'Model': 'model.md'
+    - 'App': 'core/app.md'
+    - 'Controller': 'core/controller.md'
+    - 'Model': 'core/model.md'

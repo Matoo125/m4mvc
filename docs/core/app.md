@@ -38,7 +38,6 @@ All those properties are set from url, but you can change their default value, b
 | $settings['viewExtension']  | php           | used only if views are used, extension of a view file. |
 | $settings['renderFunction'] | render        | render function to be called (render, renderTwig), again only if views are used. |
 | $settings['namespace']      | app           | namespace of your app                    |
-|                             |               |                                          |
 
 All those properties have to be set correctly before app is run .
 
