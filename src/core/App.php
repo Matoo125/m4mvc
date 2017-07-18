@@ -124,8 +124,8 @@ class App
 	private function instantiateController($url)
 	{ 
 		// check if controller exists
-		if ($url && file_exists($this->paths['controllers'] . DS . 
-								$this->module . DS . 
+		if ($url && file_exists($this->paths['controllers'] . DIRECTORY_SEPARATOR . 
+								$this->module . DIRECTORY_SEPARATOR . 
 								ucfirst($url[0]) . '.php')) {
 
 			$this->controller = ucfirst($url[0]);
@@ -175,8 +175,8 @@ class App
 		switch ($status) {
 			case 200:
 				// module/controller/method
-				$view = $this->module . DS . lcfirst($this->controller) . DS .  $this->method;
-				$viewPath = $this->paths['views'] . DS . $view . '.' . $this->settings['viewExtension'];
+				$view = $this->module . DIRECTORY_SEPARATOR . lcfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
+				$viewPath = $this->paths['views'] . DIRECTORY_SEPARATOR . $view . '.' . $this->settings['viewExtension'];
 				if (file_exists($viewPath)) {
 					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$view . '.' . $this->settings['viewExtension']]);
 				} else {

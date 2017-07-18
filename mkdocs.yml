@@ -1,0 +1,6 @@
+site_name: M4MVC
+pages:
+    - 'Introduction': 'index.md'
+    - 'App': 'app.md'
+    - 'Controller': 'controller.md'
+    - 'Model': 'model.md'
