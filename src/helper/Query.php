@@ -113,11 +113,6 @@ class Query
             $query .= " ";
             $this->where = null;
           }
-          if (!empty($this->limit)) {
-            $query .= "LIMIT ";
-            $query .= $this->limit;
-            $this->limit = null;
-          }
           if (!empty($this->groupBy)) {
             $query .= " GROUP BY ";
             $query .= $this->groupBy;
@@ -127,6 +122,11 @@ class Query
             $query .= " ORDER BY ";
             $query .= implode(', ', $this->orderBy) . ' ';
             $this->orderBy = [];
+          }
+          if (!empty($this->limit)) {
+            $query .= "LIMIT ";
+            $query .= $this->limit;
+            $this->limit = null;
           }
           return $query;
           break;

@@ -30,6 +30,9 @@ class Controller
 
 	public function renderTwig($view = null)
 	{
+		if ($this->view) {
+			$view = $this->view;
+		}
 		///////////////// DECLARE TWIG INSTANCE /////////////////
 		$loader = new \Twig_Loader_Filesystem(APP . DS . 'view');
 		$twig = new \Twig_Environment( $loader, array(
@@ -39,7 +42,7 @@ class Controller
 		///////////////// ADD GLOBALS /////////////////
 		$twig->addGlobal("session", $_SESSION);
 		///////////////// Create filters /////////////////
-		$slugifilter = new \Twig_Filter('slugify', 'slugify');
+		$slugifilter = new \Twig_Filter('slugify', '\\m4\\m4mvc\\helper\\Str::slugify');
 		$twig->addFilter($slugifilter);
 		///////////////// ADD DATA TO ARRAY /////////////////
 		$this->data['sessionclass'] = new \m4\m4mvc\helper\Session;

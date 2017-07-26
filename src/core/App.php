@@ -20,6 +20,7 @@ class App
 	];
 	// other settings
 	public $settings = [
+		'moduleVies' => false,
 		'viewExtension'	=>	'php',
 		'renderFunction' => 'render',
 		'namespace'		=>	'app'
@@ -175,12 +176,14 @@ class App
 		switch ($status) {
 			case 200:
 				// module/controller/method
-				$view = $this->module . DIRECTORY_SEPARATOR . lcfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
+				$view = '';
+				if ($this->settings['moduleView']) { $view = $this.module; }
+				$view .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
 				$viewPath = $this->paths['views'] . DIRECTORY_SEPARATOR . $view . '.' . $this->settings['viewExtension'];
 				if (file_exists($viewPath)) {
 					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$view . '.' . $this->settings['viewExtension']]);
 				} else {
-					echo 'view: ' . $view . ' could not be found';
+					echo 'view: ' . $viewPath . ' could not be found';
 				}
 				break;
 			case 'json': 
