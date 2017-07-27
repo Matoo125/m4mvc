@@ -20,7 +20,7 @@ class App
 	];
 	// other settings
 	public $settings = [
-		'moduleVies' => false,
+		'moduleView' => false,
 		'viewExtension'	=>	'php',
 		'renderFunction' => 'render',
 		'namespace'		=>	'app'
