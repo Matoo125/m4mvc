@@ -13,6 +13,8 @@ class Controller
 	protected $data = [];
 	// Static response
 	public static $response = [];
+	// path to theme
+	public $pathToTheme = null;
 
 	public function getModel($name)
 	{
@@ -34,7 +36,7 @@ class Controller
 			$view = $this->view;
 		}
 		///////////////// DECLARE TWIG INSTANCE /////////////////
-		$loader = new \Twig_Loader_Filesystem(APP . DS . 'view');
+		$loader = new \Twig_Loader_Filesystem($this->pathToTheme);
 		$twig = new \Twig_Environment( $loader, array(
 		  'debug' => true,
 		) );

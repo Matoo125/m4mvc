@@ -181,6 +181,7 @@ class App
 				$view .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
 				$viewPath = $this->paths['views'] . DIRECTORY_SEPARATOR . $view . '.' . $this->settings['viewExtension'];
 				if (file_exists($viewPath)) {
+					$this->instance->pathToTheme = $this->paths['views'];
 					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$view . '.' . $this->settings['viewExtension']]);
 				} else {
 					echo 'view: ' . $viewPath . ' could not be found';
