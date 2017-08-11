@@ -25,7 +25,7 @@ class Controller
 	public function render($view = null)
 	{
 		if ($view) {
-			# code...
+			require_once($view);
 		}
 
 	}

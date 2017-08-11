@@ -3,30 +3,24 @@ namespace m4\m4mvc\core;
 
 use m4\m4mvc\helper\Request;
 
-/*
- * This is the framework's brain
- * 1. URL is parsed
- * 2. Module is called
- * 3. Controller is instantiated
- * 4. Method is called and params are passed
- */
 
 class App
 {
-	// paths to be used to find controllers and views
 	public $paths = [
 		'controllers' => '../controllers',
-		'views'		  => false
+		'theme'		  => false, 		// theme might be array with path to each module theme
+		'log'				=>	false
 	];
-	// other settings
+
 	public $settings = [
-		'moduleView' => false,
-		'viewExtension'	=>	'php',
-		'renderFunction' => 'render',
-		'namespace'		=>	'app'
+		'debug'						=>	false,
+		'moduleView' 			=> false,
+		'modules'		 			=>	false,
+		'viewExtension'		=>	'php',
+		'renderFunction'	=> 'render',
+		'namespace'				=>	null
 	];
-	// Module [or folder] to be used to find controller
-	public $module = 'api';
+
 	// Controller to be instantized
 	public $controller = 'Home';
 	// Instance of controller
@@ -38,116 +32,67 @@ class App
 	// Type of response
 	public $response = 'view';
 
-	/** 
-	 *	Run the application 
-	 **/
+
 	public function run()
 	{
 		// create cleaned array from url
 		$url = $this->parseUrl();
 
-		// set the current module
-		$url = $this->setModule($url);
+		// module handler
+		if ($this->settings['modules']) {
+			$url = Module::set($url);
+			if (!Module::$active) {
+				throw new \Exception('You need to register modules before you can use them');
+			}
+		}
 
 		// handle request
 		$request = Request::handle();
 
 		// create instance of controller
-		$url = $this->instantiateController($url);
+		$url = $this->setController($url);
 
 		// call the method
 		$this->callMethod($url);
 	}
 
-	public function db(array $credentials, string $namespace = null) {
-		Model::$credentials = $credentials;
-		if ($namespace) {
-			Controller::$modelNamespace = $namespace;
-		} else {
-			Controller::$modelNamespace = $this->settings['namespace'] . '\\model\\';
-		}
-	}
-
-	private function checkControllerFolder() {
-		// check controllers folder
-		if (!file_exists($this->paths['controllers'])) {
-			$error = 'Path: ' . $this->paths['controllers'] . ' does not exists'; 
-			throw new \Exception($error);
-		}
-	}
-
-	private function checkController() {
-		// check default controller
-		$path = $this->paths['controllers'] . '/' . $this->module . '/' . $this->controller . '.php';
-		if (!file_exists($path)) {
-			$error = 'Default controller: ' . $path . ' does not exists';
-			throw new \Exception($error);
-		}
-
-		$class = $this->settings['namespace'] . '\\controllers\\' . 
-			     $this->module . '\\' . $this->controller;
-		if (!class_exists($class)) {
-			$error = 'Class: ' . $class . ' does not exists';
-			throw new \Exception($error);
-		}
-	}
-
-	/*
-	* parseURL no arguments
-	* returns url array
-	* or null
-	*/
-	private function parseUrl()
-	{
-		if (isset($_GET['url'])) {
-			return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
-		}
-	}
-
-	/* 	
-	 * 	Set module from first url param
-	 */
-	private function setModule($url)
-	{
-		$this->checkControllerFolder();
-		$modules = array_diff(scandir($this->paths['controllers']), ['.', '..', $this->module]);
-		if (in_array($url[0], $modules)) {
-			$this->module = $modules[array_search($url[0], $modules)];
-			array_shift($url);
-		}
-		return $url;
-	}
-
-	/*
-	 *	Create instance of controller
-	 *	use default or take from url
-	 */
-	private function instantiateController($url)
+	private function setController($url)
 	{ 
-		// check if controller exists
-		if ($url && file_exists($this->paths['controllers'] . DIRECTORY_SEPARATOR . 
-								$this->module . DIRECTORY_SEPARATOR . 
-								ucfirst($url[0]) . '.php')) {
 
+		if ($url && file_exists($this->paths['controllers'] . DIRECTORY_SEPARATOR . Module::$active . DIRECTORY_SEPARATOR . ucfirst($url[0] . '.php'))) {
 			$this->controller = ucfirst($url[0]);
 		    array_shift($url);
 		}
-		$this->checkController();
-		// prepend namespaces
-		$controller = $this->settings['namespace'] . '\\controllers\\' . 
-					  $this->module . '\\' . $this->controller;
-		$this->instance = new $controller;
+
+		// check default controller
+		$path = $this->paths['controllers'] . '/' . Module::$active . '/' . $this->controller . '.php';
+		if (!file_exists($path)) {
+			$error = 'Default controller: "' . $path . '" does not exists';
+			throw new \Exception($error);
+		}
+
+		if ($this->settings['namespace']) {
+			$class = $this->settings['namespace'] . '\\' . str_replace('/', '\\', $this->paths['controllers']) . '\\';
+			$class .= $this->settings['modules'] ? Module::$active . '\\' : '';
+			$class .= $this->controller;
+		} else {
+			$class = $this->controller;
+		}
+
+		if (!class_exists($class)) {
+			$error = 'Class: "' . $class . '" does not exists ';
+			throw new \Exception($error);
+		}
+
+		$this->instance = new $class;
 
 		return $url;
 	}
 
-	/*
-	 * 	Call method of controller
-	 * 	and pass parameters
-	 */
 	private function callMethod($url)
 	{
-		// set the method if exists
+
+		// set the method 
 		if (isset($url[0]) && method_exists($this->instance, $url[0])) {
 			$this->method = $url[0];
 			array_shift($url);
@@ -156,14 +101,12 @@ class App
 		$this->params = $url ? $url : [];
 
 		if (method_exists($this->instance, $this->method)) {
-			// call the method
+
 			call_user_func_array([$this->instance, $this->method], $this->params);
 
-			return $this->module == 'api' || 
-						 $this->response == 'json' || 
-						 $this->paths['views'] === false ? 
-						 $this->callView('json') : 
-						 $this->callView(200);
+			return $this->response == 'json'  ? 
+						 $this->render('json') : 
+						 $this->render('theme');
 		} else {
 			$error = 'Method: ' . $this->method . ' of controller: ' . $this->controller . ' does not exists';
 			throw new \Exception($error);
@@ -171,18 +114,32 @@ class App
 
 	}
 
-	private function callView($status)
+	private function render($status)
 	{
 		switch ($status) {
-			case 200:
-				// module/controller/method
+			case 'theme':
+
 				$view = '';
-				if ($this->settings['moduleView']) { $view = $this.module; }
-				$view .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
-				$viewPath = $this->paths['views'] . DIRECTORY_SEPARATOR . $view . '.' . $this->settings['viewExtension'];
+
+				if ($this->paths['theme']) {
+					if (is_string($this->paths['theme'])) {
+						$view = $this->paths['theme'];
+					} else {
+						$view = $this->paths['theme'][Module::$active];
+					}
+				}
+
+				$folder = $view;
+				if ($this->settings['moduleView']) { $folder .= DIRECTORY_SEPARATOR . Module::active; }
+
+				$folder .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
+
+				$viewPath =   $folder . '.' . $this->settings['viewExtension'];
+
 				if (file_exists($viewPath)) {
-					$this->instance->pathToTheme = $this->paths['views'];
-					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$view . '.' . $this->settings['viewExtension']]);
+					$this->instance->pathToTheme = $view;
+
+					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$viewPath]);
 				} else {
 					echo 'view: ' . $viewPath . ' could not be found';
 				}
@@ -196,9 +153,31 @@ class App
 		}
 	}
 
+
+	/* helpers */
 	public function useTwig () 
 	{
 		$this->settings['viewExtension'] = 'twig';
 		$this->settings['renderFunction'] = 'renderTwig';
 	}
+
+	public function db (array $credentials, string $namespace = null) 
+	{
+		Model::$credentials = $credentials;
+		if ($namespace) {
+			Controller::$modelNamespace = $namespace;
+		} else {
+			Controller::$modelNamespace = $this->settings['namespace'] . '\\model\\';
+		}
+	}
+
+	private function parseUrl()
+	{
+		if (isset($_GET['url'])) {
+			return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+		}
+	}
+
+
 }
+
