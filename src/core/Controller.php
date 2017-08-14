@@ -32,6 +32,8 @@ class Controller
 
 	public function renderTwig($view = null)
 	{
+		$view = str_replace($this->pathToTheme, '', $view);
+
 		if ($this->view) {
 			$view = $this->view;
 		}

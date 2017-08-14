@@ -8,6 +8,7 @@ class App
 {
 	public $paths = [
 		'controllers' => '../controllers',
+		'app'				=>	false,
 		'theme'		  => false, 		// theme might be array with path to each module theme
 		'log'				=>	false
 	];
@@ -39,7 +40,7 @@ class App
 		$url = $this->parseUrl();
 
 		// module handler
-		if ($this->settings['modules']) {
+		if (Module::$active) {
 			$url = Module::set($url);
 			if (!Module::$active) {
 				throw new \Exception('You need to register modules before you can use them');
@@ -59,13 +60,21 @@ class App
 	private function setController($url)
 	{ 
 
-		if ($url && file_exists($this->paths['controllers'] . DIRECTORY_SEPARATOR . Module::$active . DIRECTORY_SEPARATOR . ucfirst($url[0] . '.php'))) {
-			$this->controller = ucfirst($url[0]);
-		    array_shift($url);
+		if ($url) {
+			$path = $this->paths['app'] . DIRECTORY_SEPARATOR . 
+							$this->paths['controllers'] . DIRECTORY_SEPARATOR . 
+							Module::$active . DIRECTORY_SEPARATOR . 
+							ucfirst($url[0] . '.php');
+			if (file_exists($path)) {
+					$this->controller = ucfirst($url[0]);
+				  array_shift($url);
+			} else {
+				echo '404 path ' . $path . ' does not exists';
+			}
 		}
 
 		// check default controller
-		$path = $this->paths['controllers'] . '/' . Module::$active . '/' . $this->controller . '.php';
+		$path = ($this->paths['app'] ? $this->paths['app'] . '/' : '') . $this->paths['controllers'] . '/' . Module::$active . '/' . $this->controller . '.php';
 		if (!file_exists($path)) {
 			$error = 'Default controller: "' . $path . '" does not exists';
 			throw new \Exception($error);
@@ -73,7 +82,7 @@ class App
 
 		if ($this->settings['namespace']) {
 			$class = $this->settings['namespace'] . '\\' . str_replace('/', '\\', $this->paths['controllers']) . '\\';
-			$class .= $this->settings['modules'] ? Module::$active . '\\' : '';
+			$class .= Module::$active ? Module::$active . '\\' : '';
 			$class .= $this->controller;
 		} else {
 			$class = $this->controller;
@@ -83,7 +92,6 @@ class App
 			$error = 'Class: "' . $class . '" does not exists ';
 			throw new \Exception($error);
 		}
-
 		$this->instance = new $class;
 
 		return $url;
@@ -138,7 +146,6 @@ class App
 
 				if (file_exists($viewPath)) {
 					$this->instance->pathToTheme = $view;
-
 					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$viewPath]);
 				} else {
 					echo 'view: ' . $viewPath . ' could not be found';
