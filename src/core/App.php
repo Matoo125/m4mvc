@@ -144,12 +144,9 @@ class App
 
 				$viewPath =   $folder . '.' . $this->settings['viewExtension'];
 
-				if (file_exists($viewPath)) {
-					$this->instance->pathToTheme = $view;
-					call_user_func_array([$this->instance, $this->settings['renderFunction']], [$viewPath]);
-				} else {
-					echo 'view: ' . $viewPath . ' could not be found';
-				}
+				$this->instance->pathToTheme = $view;
+				call_user_func_array([$this->instance, $this->settings['renderFunction']], [$viewPath]);
+
 				break;
 			case 'json': 
 					call_user_func([$this->instance, 'json']);
