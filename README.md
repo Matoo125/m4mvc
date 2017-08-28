@@ -4,8 +4,6 @@ This project is in active development.
 
 Read the [documentation](https://matoo125.github.io/m4mvc/)
 
-Check the [changelog](https://github.com/Matoo125/m4mvc/blob/master/changelog.md)
-
 
 To install it you can do:
 ```
@@ -23,17 +21,37 @@ Then:
 <?php
 
 use m4\m4mvc\core\App;
+use m4\m4mvc\core\Module;
 
 require_once('vendor/autoload.php');
 
 $app = new App;
 $app->settings = [
-	'namespace'	=>	'your\\app\\namespace'
+	'namespace'	=>	'your\\app\\namespace',
+  'modules'   =>  true // if you want co use modules
 ];
 
+// register modules
+Module::register(['web', 'admin']);
+
+
 $app->paths = [
-	'controllers'	=>	'your/path/to/controllers'
+  'controllers' =>  'app/controllers',
+  'theme'       =>  [
+    'web'   =>  'app/theme/web', // path to public theme
+    'admin' =>  'app/theme/admin' // path to admin theme
+  ]
 ];
+
+// db connection
+$app->db([
+  'DB_HOST'   =>  'localhost',
+  'DB_PASSWORD' =>  '',
+  'DB_NAME'   =>  'test',
+  'DB_USER'   =>  'root'
+]);
+
+// run the app
 $app->run();
 
 
@@ -43,7 +61,6 @@ Or check [M4 MVC Example App](https://github.com/Matoo125/M4MVC-Example-App).
 
 
 Everything important lives in `/src` directory. 
-
 
 
 ### Apps running on M4MVC
