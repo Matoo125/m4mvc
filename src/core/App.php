@@ -138,7 +138,7 @@ class App
 				}
 
 				$folder = $view;
-				if ($this->settings['moduleView']) { $folder .= DIRECTORY_SEPARATOR . Module::active; }
+				if ($this->settings['moduleView']) { $folder .= DIRECTORY_SEPARATOR . Module::$active; }
 
 				$folder .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
 

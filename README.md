@@ -37,6 +37,7 @@ Module::register(['web', 'admin']);
 
 $app->paths = [
   'controllers' =>  'app/controllers',
+  'app' =>  'app',
   'theme'       =>  [
     'web'   =>  'app/theme/web', // path to public theme
     'admin' =>  'app/theme/admin' // path to admin theme
