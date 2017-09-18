@@ -8,8 +8,8 @@ class App
 {
 	public $paths = [
 		'controllers' => '../controllers',
-		'app'				=>	false,
-		'theme'		  => false, 		// theme might be array with path to each module theme
+		'app'				=>	false, // required
+		'theme'		  => false,  // theme might be array with path to each module theme
 		'log'				=>	false
 	];
 
@@ -43,7 +43,8 @@ class App
 		if (Module::$active) {
 			$url = Module::set($url);
 			if (!Module::$active) {
-				throw new \Exception('You need to register modules before you can use them');
+				$msg = 'You need to register modules before you can use them';
+				throw new \Exception($msg);
 			}
 		}
 
@@ -57,36 +58,46 @@ class App
 		$this->callMethod($url);
 	}
 
+	private function findControllerInUrl ($url)
+	{
+		$path = $this->paths['app'] . DIRECTORY_SEPARATOR . 
+						$this->paths['controllers'] . DIRECTORY_SEPARATOR . 
+						Module::$active . DIRECTORY_SEPARATOR . 
+						ucfirst($url[0] . '.php');
+		if (!file_exists($path)) {
+			$msg = '404 path ' . $path . ' does not exists';
+			throw new \Exception($msg);
+		}
+		$this->controller = ucfirst($url[0]);
+	  return array_shift($url);
+	}
+
+	private function configureNamespace ()
+	{
+		if (!$this->settings['namespace']) { return $this->controller; }
+
+		$class = $this->settings['namespace'] . '\\' . 
+						 str_replace('/', '\\', $this->paths['controllers']) . '\\';
+		$class .= Module::$active ? Module::$active . '\\' : '';
+		$class .= $this->controller;
+		return $class;
+	}
+
 	private function setController($url)
 	{ 
+		if ($url) $url = $this->findControllerInUrl($url);
 
-		if ($url) {
-			$path = $this->paths['app'] . DIRECTORY_SEPARATOR . 
-							$this->paths['controllers'] . DIRECTORY_SEPARATOR . 
-							Module::$active . DIRECTORY_SEPARATOR . 
-							ucfirst($url[0] . '.php');
-			if (file_exists($path)) {
-					$this->controller = ucfirst($url[0]);
-				  array_shift($url);
-			} else {
-				echo '404 path ' . $path . ' does not exists';
-			}
-		}
+		$path = (isset($this->paths['app']) ? $this->paths['app'] . '/' : '') . 
+						 $this->paths['controllers'] . '/' . 
+						 Module::$active . '/' . 
+						 $this->controller . '.php';
 
-		// check default controller
-		$path = ($this->paths['app'] ? $this->paths['app'] . '/' : '') . $this->paths['controllers'] . '/' . Module::$active . '/' . $this->controller . '.php';
 		if (!file_exists($path)) {
-			$error = 'Default controller: "' . $path . '" does not exists';
+			$error = 'Controller: "' . $path . '" does not exists';
 			throw new \Exception($error);
 		}
 
-		if ($this->settings['namespace']) {
-			$class = $this->settings['namespace'] . '\\' . str_replace('/', '\\', $this->paths['controllers']) . '\\';
-			$class .= Module::$active ? Module::$active . '\\' : '';
-			$class .= $this->controller;
-		} else {
-			$class = $this->controller;
-		}
+		$class = $this->configureNamespace();
 
 		if (!class_exists($class)) {
 			$error = 'Class: "' . $class . '" does not exists ';
@@ -105,20 +116,22 @@ class App
 			$this->method = $url[0];
 			array_shift($url);
 		}
+
 		// set the params
 		$this->params = $url ? $url : [];
 
-		if (method_exists($this->instance, $this->method)) {
-
-			call_user_func_array([$this->instance, $this->method], $this->params);
-
-			return $this->response == 'json'  ? 
-						 $this->render('json') : 
-						 $this->render('theme');
-		} else {
-			$error = 'Method: ' . $this->method . ' of controller: ' . $this->controller . ' does not exists';
+		if (!method_exists($this->instance, $this->method)) {
+			$error = 'Method: ' . $this->method . 
+							 ' of controller: ' . $this->controller . 
+							 ' does not exists';
 			throw new \Exception($error);
-		}
+		} 
+
+		call_user_func_array([$this->instance, $this->method], $this->params);
+
+		return $this->response == 'json'  ? 
+					 $this->render('json') : 
+					 $this->render('theme');
 
 	}
 
@@ -127,25 +140,32 @@ class App
 		switch ($status) {
 			case 'theme':
 
-				$view = '';
+				$view = $this->paths['app'] . DIRECTORY_SEPARATOR;
 
 				if ($this->paths['theme']) {
 					if (is_string($this->paths['theme'])) {
-						$view = $this->paths['theme'];
+						$view .= $this->paths['theme'];
 					} else {
-						$view = $this->paths['theme'][Module::$active];
+						$view .= $this->paths['theme'][Module::$active];
 					}
 				}
 
 				$folder = $view;
-				if ($this->settings['moduleView']) { $folder .= DIRECTORY_SEPARATOR . Module::$active; }
+				if ($this->settings['moduleView']) { 
+					$folder .= DIRECTORY_SEPARATOR . Module::$active; 
+				}
 
-				$folder .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . DIRECTORY_SEPARATOR .  $this->method;
+				$folder .= DIRECTORY_SEPARATOR . ucfirst($this->controller) . 
+									 DIRECTORY_SEPARATOR .  $this->method;
 
 				$viewPath =   $folder . '.' . $this->settings['viewExtension'];
 
 				$this->instance->pathToTheme = $view;
-				call_user_func_array([$this->instance, $this->settings['renderFunction']], [$viewPath]);
+
+				call_user_func_array(
+					[$this->instance, $this->settings['renderFunction']], 
+					[$viewPath]
+				);
 
 				break;
 			case 'json': 
@@ -178,7 +198,15 @@ class App
 	private function parseUrl()
 	{
 		if (isset($_GET['url'])) {
-			return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+			return explode(
+				'/', filter_var(
+					rtrim(
+						$_GET['url'], 
+						'/'
+					), 
+					FILTER_SANITIZE_URL
+				)
+			);
 		}
 	}
 
