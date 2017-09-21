@@ -4,26 +4,27 @@ namespace m4\m4mvc\core;
 
 class Module
 {
+  // list of modules
   public static $list = [];
 
+  // string of active module
   public static $active = null;
 
-  public static function register ($modules)
+  // register modules to use
+  public static function register (array $modules)
   {
     self::$list = array_merge(self::$list, $modules);
     self::$active = self::$list[0];
-
   }
 
-  public static function set ($url)
+  // set active module from url
+  public static function set (array $url)
   {
     if (in_array($url[0], self::$list)) {
       self::$active = $url[0];
       array_shift($url);
-      return $url;
     } 
-    else { 
-      return $url; 
-    }
+    
+    return $url; 
   }
 }

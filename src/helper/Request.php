@@ -59,15 +59,13 @@ class Request
 		switch (self::getRequestType()) {
 			case 'POST':
 				// get ajax json post data if request is empty
-				$_POST = !empty($_POST) ? $_POST : self::jsonPost();
+				$_POST = empty($_POST) ? self::jsonPost() : $_POST;
 				self::$data = $_POST;
 				break;
-			
 			default:
 				self::$data = $_GET;
 				break;
 		}
-		return;
 	}
 
 	public static function getRequestType ()

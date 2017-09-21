@@ -33,20 +33,19 @@ class App
 	// Type of response
 	public $response = 'view';
 
+	public function mapUrl (array $map)
+	{
+		if (!isset($_GET['url'])) return;
+		$_GET['url'] = $map[$_GET['url']] ?? $_GET['url'];
+	}
 
 	public function run()
 	{
 		// create cleaned array from url
 		$url = $this->parseUrl();
 
-		// module handler
-		if (Module::$active) {
-			$url = Module::set($url);
-			if (!Module::$active) {
-				$msg = 'You need to register modules before you can use them';
-				throw new \Exception($msg);
-			}
-		}
+		// set module from url
+		if (Module::$active AND is_array($url)) { $url = Module::set($url); }
 
 		// handle request
 		$request = Request::handle();
@@ -65,14 +64,14 @@ class App
 						Module::$active . DIRECTORY_SEPARATOR . 
 						ucfirst($url[0] . '.php');
 		if (!file_exists($path)) {
-			$msg = '404 path ' . $path . ' does not exists';
-			throw new \Exception($msg);
+			return $url; // custom 404 handler
 		}
 		$this->controller = ucfirst($url[0]);
-	  return array_shift($url);
+		array_shift($url);
+	  return $url;
 	}
 
-	private function configureNamespace ()
+	private function prependNamespace ()
 	{
 		if (!$this->settings['namespace']) { return $this->controller; }
 
@@ -87,7 +86,7 @@ class App
 	{ 
 		if ($url) $url = $this->findControllerInUrl($url);
 
-		$path = (isset($this->paths['app']) ? $this->paths['app'] . '/' : '') . 
+		$path =  $this->paths['app'] . '/' . 
 						 $this->paths['controllers'] . '/' . 
 						 Module::$active . '/' . 
 						 $this->controller . '.php';
@@ -97,7 +96,7 @@ class App
 			throw new \Exception($error);
 		}
 
-		$class = $this->configureNamespace();
+		$class = $this->prependNamespace();
 
 		if (!class_exists($class)) {
 			$error = 'Class: "' . $class . '" does not exists ';
@@ -110,7 +109,6 @@ class App
 
 	private function callMethod($url)
 	{
-
 		// set the method 
 		if (isset($url[0]) && method_exists($this->instance, $url[0])) {
 			$this->method = $url[0];
@@ -118,7 +116,7 @@ class App
 		}
 
 		// set the params
-		$this->params = $url ? $url : [];
+		$this->params = is_array($url) ? $url : [];
 
 		if (!method_exists($this->instance, $this->method)) {
 			$error = 'Method: ' . $this->method . 
