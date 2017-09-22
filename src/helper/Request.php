@@ -61,11 +61,13 @@ class Request
 				// get ajax json post data if request is empty
 				$_POST = empty($_POST) ? self::jsonPost() : $_POST;
 				self::$data = $_POST;
-				break;
+			break;
 			default:
 				self::$data = $_GET;
-				break;
+			break;
 		}
+
+		return self::parseUrl();
 	}
 
 	public static function getRequestType ()
@@ -89,4 +91,26 @@ class Request
 		}
 		return $arr;
 	}
+
+	private static function parseUrl()
+	{
+	  if (isset($_GET['url'])) {
+	    return explode(
+	      '/', filter_var(
+	        rtrim(
+	          $_GET['url'], 
+	          '/'
+	        ), 
+	        FILTER_SANITIZE_URL
+	      )
+	    );
+	  }
+	}
+
+	public static function mapUrl (array $map)
+	{
+	  if (!isset($_GET['url'])) return;
+	  $_GET['url'] = $map[$_GET['url']] ?? $_GET['url'];
+	}
+
 }

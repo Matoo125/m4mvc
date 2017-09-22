@@ -14,17 +14,26 @@ class Module
   public static function register (array $modules)
   {
     self::$list = array_merge(self::$list, $modules);
-    self::$active = self::$list[0];
+    self::$active = array_keys(self::$list)[0];
   }
 
   // set active module from url
   public static function set (array $url)
   {
-    if (in_array($url[0], self::$list)) {
+    if (in_array($url[0], array_keys(self::$list))) {
       self::$active = $url[0];
       array_shift($url);
     } 
-    
     return $url; 
+  }
+
+  public static function render ()
+  {
+    return self::$list[self::$active]['render'];
+  }
+
+  public static function folder ()
+  {
+    return self::$list[self::$active]['folder'];
   }
 }

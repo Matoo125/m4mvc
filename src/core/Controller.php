@@ -24,14 +24,12 @@ class Controller
 
 	public function render($view = null)
 	{
-		if ($view) {
-			require_once($view);
-		}
-
+		if ($view) require_once($view);
 	}
 
 	public function renderTwig($view = null)
 	{
+		str_replace(search, replace, subject)
 		$view = str_replace($this->pathToTheme, '', $view);
 
 		if ($this->view) {
@@ -39,21 +37,27 @@ class Controller
 		}
 		///////////////// DECLARE TWIG INSTANCE /////////////////
 		$loader = new \Twig_Loader_Filesystem($this->pathToTheme);
-		$twig = new \Twig_Environment( $loader, array(
-		  'debug' => true,
-		) );
+		$twig = new \Twig_Environment(
+			$loader, 
+			array(
+		  	'debug' => true,
+			)
+		);
 		$twig->addExtension(new \Twig_Extension_Debug());
 		///////////////// ADD GLOBALS /////////////////
 		$twig->addGlobal("session", $_SESSION);
 		///////////////// Create filters /////////////////
-		$slugifilter = new \Twig_Filter('slugify', '\\m4\\m4mvc\\helper\\Str::slugify');
+		$slugifilter = new \Twig_Filter(
+			'slugify', 
+			'\\m4\\m4mvc\\helper\\Str::slugify'
+		);
 		$twig->addFilter($slugifilter);
 		///////////////// ADD DATA TO ARRAY /////////////////
 		$this->data['sessionclass'] = new \m4\m4mvc\helper\Session;
 		// pass lang and url arrays
 		$this->data['lang'] = \m4\m4mvc\helper\Str::getLang();
 		$this->data['url']  = \m4\m4mvc\helper\Str::getUrl();
-		///////////////// RENDER TWIG TEMPLATE /////////////////
+
 		echo $twig->render($view, $this->data);
 	}
 
