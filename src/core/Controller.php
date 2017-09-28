@@ -29,7 +29,6 @@ class Controller
 
 	public function renderTwig($view = null)
 	{
-		str_replace(search, replace, subject)
 		$view = str_replace($this->pathToTheme, '', $view);
 
 		if ($this->view) {
