@@ -1,6 +1,6 @@
 ## M4 Framework MVC
 
-This project is in active development. 
+This project is in active development. Feel free to contribute or ask me if you have question.
 
 Read the [documentation](https://matoo125.github.io/m4mvc/)
 

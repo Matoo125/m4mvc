@@ -36,4 +36,18 @@ class Module
   {
     return self::$list[self::$active]['folder'];
   }
+
+  public static function beforeStart ()
+  {
+    if (!isset(self::$list[self::$active]['beforeStart'])) return;
+    $f = self::$list[self::$active]['beforeStart'];
+    if (is_callable($f)) $f();
+  }
+
+  public static function beforeEnd ()
+  {
+    if (!isset(self::$list[self::$active['beforeEnd']])) return;
+    $f = self::$list(self::$active)['beforeEnd'];
+    if (is_callable($f)) $f();
+  }
 }

@@ -40,11 +40,15 @@ class App
     // set module from url
     if (Module::$active AND is_array($url)) { $url = Module::set($url); }
 
+    Module::beforeStart();
+
     // create instance of controller
     $url = $this->setController($url);
 
     // call the method
     $this->callMethod($url);
+
+    Module::beforeEnd();
   }
 
   private function findControllerInUrl ($url)
