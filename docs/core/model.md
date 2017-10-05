@@ -10,6 +10,7 @@
 | ----- | --------------------------- |
 | query | Holds Query Helper Instance |
 | db    | Holds database connection   |
+| credentials | DB credentials array, is static |
 
 ### Talking With Database
 
@@ -36,13 +37,27 @@ If you want to use runQuery directly you need to set third parameter **type** [i
 | 3    | Create Update Delete returns boolean     |
 | 4    | Create Update Delete returns last inserted id |
 
+```php
+// assuming access to extendeding model instance
+$this->model->save("UPDATE users SET name = :name", ['name' => 'John']);
+
+$this->model->save("DELETE FROM users WHERE name = :name", ['name' => 'Jan']);
+
+$this->model->fetch("SELECT * FROM users WHERE id = :id", ['id' => 251]);
+
+$this->model->fetchAll("SELECT * FROM users");
+```
+
 ### Other core methods
 
 **image** (received image *, folder to upload *)
 
+[this method is experimental and will be changed or removed]
+
 This method is storing image records in `images table` and it also calls `Image::upload` helper to upload the image.
 
 It returns last inserted id or null if it fails.
+
 
 ------
 

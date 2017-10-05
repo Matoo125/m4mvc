@@ -1,4 +1,6 @@
 ## M4 Framework MVC
+[![GitHub issues](https://img.shields.io/github/issues/Matoo125/m4mvc.svg)](https://github.com/Matoo125/m4mvc/issues)
+[![Packagist Version](https://img.shields.io/packagist/v/m4/m4mvc.svg)](https://packagist.org/packages/m4/m4mvc)
 
 This project is in active development. Feel free to contribute or ask me if you have question.
 
@@ -59,9 +61,6 @@ $app->run();
 ```
 
 Or check [M4 MVC Example App](https://github.com/Matoo125/M4MVC-Example-App).
-
-
-Everything important lives in `/src` directory. 
 
 
 ### Apps running on M4MVC

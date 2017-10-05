@@ -7,11 +7,11 @@ class App
 {
   public $paths = [
     // required path to controllers folder, relative to app
-    'controllers' => false, 
+    'controllers' => 'controllers', 
     // required path to models folder, relative to app
-    'model'       => false,
+    'model'       => 'model',
     // required path to base app folder, relative to index or absolute
-    'app'       =>  false,
+    'app'       =>  'app',
     // not done yet path to logs folder, relative to app 
     'log'       =>  false 
   ];

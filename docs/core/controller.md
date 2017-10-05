@@ -20,7 +20,7 @@ You might create your own base controller, which extends this controller.
 
 All those calls should be made from controller which extends this.
 
-To set controller
+To set model
 
 ```php
 $this->model = $this->getModel('Name')
