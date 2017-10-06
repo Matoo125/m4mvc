@@ -6,18 +6,19 @@
 
 ## Simple usage
 ```php
+<?php
 $app = new App;
-
 $app->run()
 ```
-```php
+## Little configuration
+``` php
+<?php
 // change paths
 $app->paths = [
   'controller'  =>  'myControllers', // folder for controllers
   'model'       =>  'myModel', // folder for models
   'app'         =>  'myApp' // app root
 ];
-
 // set namespace
 $app->settings['namespace'] = "MyApp"; 
 ```

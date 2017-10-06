@@ -6,9 +6,11 @@ pages:
       - 'App': 'core/app.md'
       - 'Controller': 'core/controller.md'
       - 'Model': 'core/model.md'
+      - 'Module': 'core/module.md'
     - 'Helpers':
       - 'String': 'helper/string.md'
       - 'Query': 'helper/query.md'
-
+      - 'Redirect': 'helper/redirect.md'
+      - 'Request': 'helper/request.md'
 markdown_extensions:
-    - codehilite
+  - codehilite

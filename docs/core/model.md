@@ -38,13 +38,11 @@ If you want to use runQuery directly you need to set third parameter **type** [i
 | 4    | Create Update Delete returns last inserted id |
 
 ```php
+<?php
 // assuming access to extendeding model instance
 $this->model->save("UPDATE users SET name = :name", ['name' => 'John']);
-
 $this->model->save("DELETE FROM users WHERE name = :name", ['name' => 'Jan']);
-
 $this->model->fetch("SELECT * FROM users WHERE id = :id", ['id' => 251]);
-
 $this->model->fetchAll("SELECT * FROM users");
 ```
 

@@ -13,14 +13,14 @@
 ### getUrl 
 **argument**: *key*
 
-**description**: value will be returned based on key in `Helper::$url` array. If key is null it will return whole array.
+**description**: value will be returned based on key in `Str::$url` array. If key is null it will return whole array.
 
 --------------
 
 ### getLang
 **argument**: *key*
 
-**description**: value will be returned based on key in `Helper::$lang` array. If key is null it will return whole array.
+**description**: value will be returned based on key in `Str::$lang` array. If key is null it will return whole array.
 
 
 ----------

@@ -12,6 +12,7 @@
 #### Usage
 
 ```php
+<?php
 Module::register([
   'web' => [
     'render'  =>  'view',
@@ -29,5 +30,6 @@ Module::register([
   'api' =>  [
     'render'  =>  'json'
   ]
-]);
+]); 
+```
 

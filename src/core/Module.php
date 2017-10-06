@@ -46,7 +46,7 @@ class Module
 
   public static function beforeEnd ()
   {
-    if (!isset(self::$list[self::$active['beforeEnd']])) return;
+    if (!isset(self::$list[self::$active]['beforeEnd'])) return;
     $f = self::$list(self::$active)['beforeEnd'];
     if (is_callable($f)) $f();
   }

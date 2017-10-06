@@ -7,16 +7,16 @@ There are 3 core files:
 - [App](core/app.md)
 - [Model](core/model.md)
 - [Controller](core/controller.md)
-
+- [Module](core/module.md)
 
 And 7 helper files
 
 - Image
-- Query
-- Redirect
-- Request
-- Response
+- [Query](helper/query.md)
+- [Redirect](helper/redirect.md)
+- [Request](helper/request.md)
+- [Response](helper/response.md)
 - Session
-- Str
+- [Str](helper/string.md)
 
 Then there is also extra helper folder `user` with can be used for fast and simple authentication system.

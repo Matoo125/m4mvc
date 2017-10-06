@@ -18,22 +18,13 @@ You might create your own base controller, which extends this controller.
 
 ## Usage
 
-All those calls should be made from controller which extends this.
-
-To set model
-
 ```php
+<?php
+// set model
 $this->model = $this->getModel('Name')
-// for this to work modelNamespace has to be set
-```
-
-Set data
-
-```php
+// set data
 $this->data['key'] = 'value';
 ```
-
-
 
 ## Rendering
 
