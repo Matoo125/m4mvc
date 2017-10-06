@@ -199,6 +199,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/module/" title="Module" class="md-nav__link">
+      Module
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -333,6 +345,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../redirect/" title="Redirect" class="md-nav__link">
+      Redirect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request/" title="Request" class="md-nav__link">
+      Request
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -436,33 +472,42 @@
 </blockquote>
 <p>It works by chaining methods and then using <code>build()</code> as the last one. </p>
 <h2 id="example">Example</h2>
-<div class="codehilite"><pre><span></span><span class="x">$query = $this-&gt;query-&gt;select(&#39;name&#39;, &#39;age&#39;)-&gt;from(&#39;users&#39;)-&gt;where(&#39;id = :id&#39;)-&gt;build();</span>
-
-<span class="x">$query = $this-&gt;query-&gt;select(&#39;t.hash&#39;, &#39;u.name&#39;)-&gt;from(&#39;users u&#39;)-&gt;join(&#39;left&#39;, &#39;tokens t&#39;, &#39;t.user_id = u.id&#39;)-&gt;limit(10)-&gt;groupBy(&#39;u.name&#39;)-&gt;orderBy(&#39;u.name DESC&#39;)-&gt;build();</span>
-
-<span class="x">$query = $this-&gt;query-&gt;insert(&#39;name&#39;, &#39;age&#39;)-&gt;into(&#39;users&#39;)-&gt;build();</span>
-
-<span class="x">$query = $this-&gt;query-&gt;update(&#39;users&#39;)-&gt;set(&#39;name&#39;, &#39;age&#39;)-&gt;where(&#39;id = :id&#39;);</span>
-
-<span class="x">$query = $this-&gt;query-&gt;delete(&#39;users&#39;)-&gt;where(&#39;id = :id&#39;);</span>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id = :id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;t.hash&#39;</span><span class="p">,</span> <span class="s1">&#39;u.name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;users u&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;tokens t&#39;</span><span class="p">,</span> <span class="s1">&#39;t.user_id = u.id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;u.name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;u.name DESC&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">into</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id = :id&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id = :id&#39;</span><span class="p">);</span>
 </pre></div>
 
 
 <h2 id="methods">Methods</h2>
 <p>There are 4 action types</p>
 <h4 id="1-select-no-argument-or-column-strings">1. select [no argument or column strings]</h4>
-<p><strong>from</strong> specifies table [string]
-<strong>limit</strong> [int or string]
-<strong>join</strong> [type, table, on] [strings]
-<strong>groupBy</strong> column name [string]
-<strong>orderBy</strong> column name [string], type (ASC / DESC) [string] </p>
+<ul>
+<li><strong>from</strong> specifies table [string]</li>
+<li><strong>limit</strong> [int or string]</li>
+<li><strong>join</strong> [type, table, on] [strings]</li>
+<li><strong>groupBy</strong> column name [string]</li>
+<li><strong>orderBy</strong> column name [string], type (ASC / DESC) [string] </li>
+</ul>
+<hr />
 <h4 id="2-insert-no-argument-or-column-strings">2. insert [no argument or column strings]</h4>
-<p><strong>into</strong> specifies table [string]</p>
+<ul>
+<li><strong>into</strong> specifies table [string]</li>
+</ul>
+<hr />
 <h4 id="3-update-table-name-string">3. update [table name string]</h4>
-<p><strong>set</strong> list of columns to update [array]</p>
+<ul>
+<li><strong>set</strong> list of columns to update [array]</li>
+</ul>
+<hr />
 <h4 id="4-delete-table-name-string">4. delete [table name string]</h4>
+<hr />
 <h4 id="common-methods">Common methods</h4>
-<p><strong>where</strong> where block [string], type: 1, 3, 4</p>
+<ul>
+<li><strong>where</strong> where block [string], type: 1, 3, 4</li>
+</ul>
                 
                   
                 
@@ -495,6 +540,20 @@
             </div>
           </a>
         
+        
+          <a href="../redirect/" title="Redirect" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Redirect
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

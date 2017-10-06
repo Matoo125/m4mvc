@@ -251,6 +251,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../module/" title="Module" class="md-nav__link">
+      Module
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -295,6 +307,30 @@
   <li class="md-nav__item">
     <a href="../../helper/query/" title="Query" class="md-nav__link">
       Query
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/redirect/" title="Redirect" class="md-nav__link">
+      Redirect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/request/" title="Request" class="md-nav__link">
+      Request
     </a>
   </li>
 
@@ -402,15 +438,11 @@
 </tbody>
 </table>
 <h2 id="usage">Usage</h2>
-<p>All those calls should be made from controller which extends this.</p>
-<p>To set model</p>
-<div class="codehilite"><pre><span></span><span class="x">$this-&gt;model = $this-&gt;getModel(&#39;Name&#39;)</span>
-<span class="x">// for this to work modelNamespace has to be set</span>
-</pre></div>
-
-
-<p>Set data</p>
-<div class="codehilite"><pre><span></span><span class="x">$this-&gt;data[&#39;key&#39;] = &#39;value&#39;;</span>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// set model</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">model</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getModel</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span>
+<span class="c1">// set data</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">;</span>
 </pre></div>
 
 

@@ -205,6 +205,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#little-configuration" title="Little configuration" class="md-nav__link">
+    Little configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#step-by-step" title="Step by Step" class="md-nav__link">
     Step by Step
   </a>
@@ -265,6 +272,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../module/" title="Module" class="md-nav__link">
+      Module
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -313,6 +332,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/redirect/" title="Redirect" class="md-nav__link">
+      Redirect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/request/" title="Request" class="md-nav__link">
+      Request
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -341,6 +384,13 @@
         <li class="md-nav__item">
   <a href="#simple-usage" title="Simple usage" class="md-nav__link">
     Simple usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#little-configuration" title="Little configuration" class="md-nav__link">
+    Little configuration
   </a>
   
 </li>
@@ -392,21 +442,22 @@
 <p><code>m4\m4mvc\core\App</code></p>
 <p><a href="https://github.com/Matoo125/M4CMS/blob/master/app/core/App.php">App</a> It functions as a router: parses URL, creates instance of <a href="../Framework/Controller">Controller</a>, calls Method and matches View or just outputs JSON.</p>
 <h2 id="simple-usage">Simple usage</h2>
-<div class="codehilite"><pre><span></span><span class="x">$app = new App;</span>
-
-<span class="x">$app-&gt;run()</span>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">App</span><span class="p">;</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">()</span>
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="x">// change paths</span>
-<span class="x">$app-&gt;paths = [</span>
-<span class="x">  &#39;controller&#39;  =&gt;  &#39;myControllers&#39;, // folder for controllers</span>
-<span class="x">  &#39;model&#39;       =&gt;  &#39;myModel&#39;, // folder for models</span>
-<span class="x">  &#39;app&#39;         =&gt;  &#39;myApp&#39; // app root</span>
-<span class="x">];</span>
-
-<span class="x">// set namespace</span>
-<span class="x">$app-&gt;settings[&#39;namespace&#39;] = &quot;MyApp&quot;; </span>
+<h2 id="little-configuration">Little configuration</h2>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// change paths</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">paths</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">&#39;controller&#39;</span>  <span class="o">=&gt;</span>  <span class="s1">&#39;myControllers&#39;</span><span class="p">,</span> <span class="c1">// folder for controllers</span>
+  <span class="s1">&#39;model&#39;</span>       <span class="o">=&gt;</span>  <span class="s1">&#39;myModel&#39;</span><span class="p">,</span> <span class="c1">// folder for models</span>
+  <span class="s1">&#39;app&#39;</span>         <span class="o">=&gt;</span>  <span class="s1">&#39;myApp&#39;</span> <span class="c1">// app root</span>
+<span class="p">];</span>
+<span class="c1">// set namespace</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="s1">&#39;namespace&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MyApp&quot;</span><span class="p">;</span> 
 </pre></div>
 
 

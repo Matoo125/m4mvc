@@ -251,6 +251,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../module/" title="Module" class="md-nav__link">
+      Module
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -295,6 +307,30 @@
   <li class="md-nav__item">
     <a href="../../helper/query/" title="Query" class="md-nav__link">
       Query
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/redirect/" title="Redirect" class="md-nav__link">
+      Redirect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/request/" title="Request" class="md-nav__link">
+      Request
     </a>
   </li>
 
@@ -435,14 +471,12 @@
 </tr>
 </tbody>
 </table>
-<div class="codehilite"><pre><span></span><span class="x">// assuming access to extendeding model instance</span>
-<span class="x">$this-&gt;model-&gt;save(&quot;UPDATE users SET name = :name&quot;, [&#39;name&#39; =&gt; &#39;John&#39;]);</span>
-
-<span class="x">$this-&gt;model-&gt;save(&quot;DELETE FROM users WHERE name = :name&quot;, [&#39;name&#39; =&gt; &#39;Jan&#39;]);</span>
-
-<span class="x">$this-&gt;model-&gt;fetch(&quot;SELECT * FROM users WHERE id = :id&quot;, [&#39;id&#39; =&gt; 251]);</span>
-
-<span class="x">$this-&gt;model-&gt;fetchAll(&quot;SELECT * FROM users&quot;);</span>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// assuming access to extendeding model instance</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="s2">&quot;UPDATE users SET name = :name&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;John&#39;</span><span class="p">]);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="s2">&quot;DELETE FROM users WHERE name = :name&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Jan&#39;</span><span class="p">]);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">model</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE id = :id&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">251</span><span class="p">]);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">model</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -488,13 +522,13 @@
           </a>
         
         
-          <a href="../../helper/string/" title="String" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../module/" title="Module" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                String
+                Module
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

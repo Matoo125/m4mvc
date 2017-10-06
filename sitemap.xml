@@ -29,6 +29,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>/core/module/</loc>
+     <lastmod>2017-10-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
@@ -41,6 +47,18 @@
         
     <url>
      <loc>/helper/query/</loc>
+     <lastmod>2017-10-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/helper/redirect/</loc>
+     <lastmod>2017-10-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/helper/request/</loc>
      <lastmod>2017-10-06</lastmod>
      <changefreq>daily</changefreq>
     </url>

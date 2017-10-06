@@ -2,17 +2,17 @@
     "docs": [
         {
             "location": "/",
-            "text": "Introduction\n\n\nM4MVC \nFramework\n is using as the name suggests \nModel, View, Controller\n architecture. Main Framework functionality can be found in \napp/core\n folder, but there are also important \napp/helper\n methods and \nconfig\n files.\n\n\nThere are 3 core files:\n\n\n\n\nApp\n\n\nModel\n\n\nController\n\n\n\n\nAnd 7 helper files\n\n\n\n\nImage\n\n\nQuery\n\n\nRedirect\n\n\nRequest\n\n\nResponse\n\n\nSession\n\n\nStr\n\n\n\n\nThen there is also extra helper folder \nuser\n with can be used for fast and simple authentication system.",
+            "text": "Introduction\n\n\nM4MVC \nFramework\n is using as the name suggests \nModel, View, Controller\n architecture. Main Framework functionality can be found in \napp/core\n folder, but there are also important \napp/helper\n methods and \nconfig\n files.\n\n\nThere are 3 core files:\n\n\n\n\nApp\n\n\nModel\n\n\nController\n\n\nModule\n\n\n\n\nAnd 7 helper files\n\n\n\n\nImage\n\n\nQuery\n\n\nRedirect\n\n\nRequest\n\n\nResponse\n\n\nSession\n\n\nStr\n\n\n\n\nThen there is also extra helper folder \nuser\n with can be used for fast and simple authentication system.",
             "title": "Introduction"
         },
         {
             "location": "/#introduction",
-            "text": "M4MVC  Framework  is using as the name suggests  Model, View, Controller  architecture. Main Framework functionality can be found in  app/core  folder, but there are also important  app/helper  methods and  config  files.  There are 3 core files:   App  Model  Controller   And 7 helper files   Image  Query  Redirect  Request  Response  Session  Str   Then there is also extra helper folder  user  with can be used for fast and simple authentication system.",
+            "text": "M4MVC  Framework  is using as the name suggests  Model, View, Controller  architecture. Main Framework functionality can be found in  app/core  folder, but there are also important  app/helper  methods and  config  files.  There are 3 core files:   App  Model  Controller  Module   And 7 helper files   Image  Query  Redirect  Request  Response  Session  Str   Then there is also extra helper folder  user  with can be used for fast and simple authentication system.",
             "title": "Introduction"
         },
         {
             "location": "/core/app/",
-            "text": "App\n\n\nm4\\m4mvc\\core\\App\n\n\nApp\n It functions as a router: parses URL, creates instance of \nController\n, calls Method and matches View or just outputs JSON.\n\n\nSimple usage\n\n\n$app = new App;\n\n\n\n$app->run()\n\n\n\n\n\n\n// change paths\n\n\n$app->paths = [\n\n\n  'controller'  =>  'myControllers', // folder for controllers\n\n\n  'model'       =>  'myModel', // folder for models\n\n\n  'app'         =>  'myApp' // app root\n\n\n];\n\n\n\n// set namespace\n\n\n$app->settings['namespace'] = \"MyApp\"; \n\n\n\n\n\n\nStep by Step\n\n\n\n\nParse URL (create array from URL string received as \n$_GET['url']\n parameter).\n\n\n\n\n\n\nSo we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit\n\n\n\n\n\n\n\n\nSets Module, if registered.\n\n\n\n\n\n\nInitializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.\n\n\n\n\n\n\nCalls Method. If not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.\n\n\n\n\n\n\nIf there are still some remaining parts of URL array, they will be passed as parameters to the method.\n\n\n\n\n\n\nCalls view based on \nmodule/controller/method\n path in \napp/views\n folder\n\n\n\n\n\n\nURL\n\n\n\n\nmodule [have to be registered]\n\n\ncontroller [default: Home], [sets the controller to be initialized]\n\n\nmethod [default: Index], [sets the method to be called]\n\n\nparams [default: empty array], [parameters to be passed to method]\n\n\n\n\nAll those properties are set from url, and you can change their default value, before calling run.\n\n\nAPI\n\n\n\n\n\n\n\n\nname\n\n\ndefault value\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n$paths['controllers']\n\n\ncontrollers\n\n\npath to your controllers\n\n\n\n\n\n\n$paths['model']\n\n\nmodel\n\n\npath to your models\n\n\n\n\n\n\n$paths['app']\n\n\napp\n\n\npath to your app\n\n\n\n\n\n\n$settings['viewExtension']\n\n\nphp\n\n\nused only if views are used, extension of a view file.\n\n\n\n\n\n\n$settings['renderFunction']\n\n\nrender\n\n\nrender function to be called (render, renderTwig), again only if views are used.\n\n\n\n\n\n\n$settings['namespace']\n\n\napp\n\n\nnamespace of your app\n\n\n\n\n\n\n\n\nAll those properties have to be set correctly before app is run .\n\n\nExample Requests\n\n\n\n\n\n\n\n\nRoute\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n/module/controller/method/param1/.../paramN\n\n\nIdeal URL Structure\n\n\n\n\n\n\n/admin/posts/edit/my-first-post\n\n\nCalls \nedit\n method with \nmy-first-post\n parameter of \nposts\n controller in \nadmin\n module and matches view.\n\n\n\n\n\n\n/posts/edit-my-third-post\n\n\nThis one \nuses the default module\n, so it does not have to be in url.\n\n\n\n\n\n\n/\n\n\nThis calls default module, default controller and default method with no parameters.",
+            "text": "App\n\n\nm4\\m4mvc\\core\\App\n\n\nApp\n It functions as a router: parses URL, creates instance of \nController\n, calls Method and matches View or just outputs JSON.\n\n\nSimple usage\n\n\n<?php\n\n\n$app\n \n=\n \nnew\n \nApp\n;\n\n\n$app\n->\nrun\n()\n\n\n\n\n\n\nLittle configuration\n\n\n<?php\n\n\n// change paths\n\n\n$app\n->\npaths\n \n=\n \n[\n\n  \n'controller'\n  \n=>\n  \n'myControllers'\n,\n \n// folder for controllers\n\n  \n'model'\n       \n=>\n  \n'myModel'\n,\n \n// folder for models\n\n  \n'app'\n         \n=>\n  \n'myApp'\n \n// app root\n\n\n];\n\n\n// set namespace\n\n\n$app\n->\nsettings\n[\n'namespace'\n]\n \n=\n \n\"MyApp\"\n;\n \n\n\n\n\n\nStep by Step\n\n\n\n\nParse URL (create array from URL string received as \n$_GET['url']\n parameter).\n\n\n\n\n\n\nSo we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit\n\n\n\n\n\n\n\n\nSets Module, if registered.\n\n\n\n\n\n\nInitializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.\n\n\n\n\n\n\nCalls Method. If not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.\n\n\n\n\n\n\nIf there are still some remaining parts of URL array, they will be passed as parameters to the method.\n\n\n\n\n\n\nCalls view based on \nmodule/controller/method\n path in \napp/views\n folder\n\n\n\n\n\n\nURL\n\n\n\n\nmodule [have to be registered]\n\n\ncontroller [default: Home], [sets the controller to be initialized]\n\n\nmethod [default: Index], [sets the method to be called]\n\n\nparams [default: empty array], [parameters to be passed to method]\n\n\n\n\nAll those properties are set from url, and you can change their default value, before calling run.\n\n\nAPI\n\n\n\n\n\n\n\n\nname\n\n\ndefault value\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n$paths['controllers']\n\n\ncontrollers\n\n\npath to your controllers\n\n\n\n\n\n\n$paths['model']\n\n\nmodel\n\n\npath to your models\n\n\n\n\n\n\n$paths['app']\n\n\napp\n\n\npath to your app\n\n\n\n\n\n\n$settings['viewExtension']\n\n\nphp\n\n\nused only if views are used, extension of a view file.\n\n\n\n\n\n\n$settings['renderFunction']\n\n\nrender\n\n\nrender function to be called (render, renderTwig), again only if views are used.\n\n\n\n\n\n\n$settings['namespace']\n\n\napp\n\n\nnamespace of your app\n\n\n\n\n\n\n\n\nAll those properties have to be set correctly before app is run .\n\n\nExample Requests\n\n\n\n\n\n\n\n\nRoute\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n/module/controller/method/param1/.../paramN\n\n\nIdeal URL Structure\n\n\n\n\n\n\n/admin/posts/edit/my-first-post\n\n\nCalls \nedit\n method with \nmy-first-post\n parameter of \nposts\n controller in \nadmin\n module and matches view.\n\n\n\n\n\n\n/posts/edit-my-third-post\n\n\nThis one \nuses the default module\n, so it does not have to be in url.\n\n\n\n\n\n\n/\n\n\nThis calls default module, default controller and default method with no parameters.",
             "title": "App"
         },
         {
@@ -22,8 +22,13 @@
         },
         {
             "location": "/core/app/#simple-usage",
-            "text": "$app = new App;  $app->run()   // change paths  $app->paths = [    'controller'  =>  'myControllers', // folder for controllers    'model'       =>  'myModel', // folder for models    'app'         =>  'myApp' // app root  ];  // set namespace  $app->settings['namespace'] = \"MyApp\";",
+            "text": "<?php  $app   =   new   App ;  $app -> run ()",
             "title": "Simple usage"
+        },
+        {
+            "location": "/core/app/#little-configuration",
+            "text": "<?php  // change paths  $app -> paths   =   [ \n   'controller'    =>    'myControllers' ,   // folder for controllers \n   'model'         =>    'myModel' ,   // folder for models \n   'app'           =>    'myApp'   // app root  ];  // set namespace  $app -> settings [ 'namespace' ]   =   \"MyApp\" ;",
+            "title": "Little configuration"
         },
         {
             "location": "/core/app/#step-by-step",
@@ -47,7 +52,7 @@
         },
         {
             "location": "/core/controller/",
-            "text": "Controller\n\n\nm4\\m4mvc\\core\\Controller\n\n\nThis\n is \nAbstract\n Controller \nClass\n which is intended to be extended by every controller.\n\n\nYou might create your own base controller, which extends this controller.\n\n\nProperties\n\n\n\n\n\n\n\n\nname\n\n\ndescription\n\n\nnote\n\n\n\n\n\n\n\n\n\n\nmodel\n\n\nto store model object\n\n\n\n\n\n\n\n\nmodelNamespace\n\n\nname space to access model\n\n\nThis can be set in App->db function\n\n\n\n\n\n\nview\n\n\npath to view\n\n\nuse this if you do not want default module/controller/method path\n\n\n\n\n\n\ndata\n\n\nData to be passed to view or outputted\n\n\n[]\n\n\n\n\n\n\nresponse\n\n\nStatic version of data\n\n\nThis is used by Response helper\n\n\n\n\n\n\n\n\nUsage\n\n\nAll those calls should be made from controller which extends this.\n\n\nTo set model\n\n\n$this->model = $this->getModel('Name')\n\n\n// for this to work modelNamespace has to be set\n\n\n\n\n\n\nSet data\n\n\n$this->data['key'] = 'value';\n\n\n\n\n\n\nRendering\n\n\nThere are 3 default render functions. render, renderTwig and json.\n\n\n\n\njson outputs pure json from data + response arrays\n\n\nrenderTwig renders twig file \n\n\nrender is for pure PHP view\n\n\n\n\nyou can write your own render function by creating your own base controller and then passing function name to $app->settings['renderFunction']",
+            "text": "Controller\n\n\nm4\\m4mvc\\core\\Controller\n\n\nThis\n is \nAbstract\n Controller \nClass\n which is intended to be extended by every controller.\n\n\nYou might create your own base controller, which extends this controller.\n\n\nProperties\n\n\n\n\n\n\n\n\nname\n\n\ndescription\n\n\nnote\n\n\n\n\n\n\n\n\n\n\nmodel\n\n\nto store model object\n\n\n\n\n\n\n\n\nmodelNamespace\n\n\nname space to access model\n\n\nThis can be set in App->db function\n\n\n\n\n\n\nview\n\n\npath to view\n\n\nuse this if you do not want default module/controller/method path\n\n\n\n\n\n\ndata\n\n\nData to be passed to view or outputted\n\n\n[]\n\n\n\n\n\n\nresponse\n\n\nStatic version of data\n\n\nThis is used by Response helper\n\n\n\n\n\n\n\n\nUsage\n\n\n<?php\n\n\n// set model\n\n\n$this\n->\nmodel\n \n=\n \n$this\n->\ngetModel\n(\n'Name'\n)\n\n\n// set data\n\n\n$this\n->\ndata\n[\n'key'\n]\n \n=\n \n'value'\n;\n\n\n\n\n\n\nRendering\n\n\nThere are 3 default render functions. render, renderTwig and json.\n\n\n\n\njson outputs pure json from data + response arrays\n\n\nrenderTwig renders twig file \n\n\nrender is for pure PHP view\n\n\n\n\nyou can write your own render function by creating your own base controller and then passing function name to $app->settings['renderFunction']",
             "title": "Controller"
         },
         {
@@ -62,7 +67,7 @@
         },
         {
             "location": "/core/controller/#usage",
-            "text": "All those calls should be made from controller which extends this.  To set model  $this->model = $this->getModel('Name')  // for this to work modelNamespace has to be set   Set data  $this->data['key'] = 'value';",
+            "text": "<?php  // set model  $this -> model   =   $this -> getModel ( 'Name' )  // set data  $this -> data [ 'key' ]   =   'value' ;",
             "title": "Usage"
         },
         {
@@ -72,7 +77,7 @@
         },
         {
             "location": "/core/model/",
-            "text": "Model\n\n\nm4\\m4mvc\\core\\Model\n\n\nAbstract model class\n is intended to be extended by all the other models.\n\n\nParameters\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nquery\n\n\nHolds Query Helper Instance\n\n\n\n\n\n\ndb\n\n\nHolds database connection\n\n\n\n\n\n\ncredentials\n\n\nDB credentials array, is static\n\n\n\n\n\n\n\n\nTalking With Database\n\n\nThere are 4 important helper methods to run SQL queries. \n\n\n\n\nsave  - insert / update / delete record\n\n\n\n\n\n\nSave method has third optional argument \nlastInsertedId\n which if set to \ntrue\n returns last inserted id. Otherwise it returns boolean of success.\n\n\n\n\n\n\n\n\nfetch - get single row\n\n\n\n\n\n\nfetchAll - get array of results\n\n\n\n\n\n\nrunQuery - run the query\n\n\n\n\n\n\n\n\nFirst 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments \nSQL Query\n and \nArray of Parameters\n. \n\n\n\n\nIf you want to use runQuery directly you need to set third parameter \ntype\n [integer]. \n\n\n\n\n\n\n\n\ntype\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n1\n\n\nFetch All [Assoc]\n\n\n\n\n\n\n2\n\n\nFetch [Assoc]\n\n\n\n\n\n\n3\n\n\nCreate Update Delete returns boolean\n\n\n\n\n\n\n4\n\n\nCreate Update Delete returns last inserted id\n\n\n\n\n\n\n\n\n// assuming access to extendeding model instance\n\n\n$this->model->save(\"UPDATE users SET name = :name\", ['name' => 'John']);\n\n\n\n$this->model->save(\"DELETE FROM users WHERE name = :name\", ['name' => 'Jan']);\n\n\n\n$this->model->fetch(\"SELECT * FROM users WHERE id = :id\", ['id' => 251]);\n\n\n\n$this->model->fetchAll(\"SELECT * FROM users\");\n\n\n\n\n\n\nOther core methods\n\n\nimage\n (received image \n, folder to upload \n)\n\n\n[this method is experimental and will be changed or removed]\n\n\nThis method is storing image records in \nimages table\n and it also calls \nImage::upload\n helper to upload the image.\n\n\nIt returns last inserted id or null if it fails.\n\n\n\n\ncountTable\n (table to count *, where clause, like clause)\n\n\nThis method counts number of records from table and you can use where or like clause to filter the results.\n\n\nReturns number of rows or null.",
+            "text": "Model\n\n\nm4\\m4mvc\\core\\Model\n\n\nAbstract model class\n is intended to be extended by all the other models.\n\n\nParameters\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nquery\n\n\nHolds Query Helper Instance\n\n\n\n\n\n\ndb\n\n\nHolds database connection\n\n\n\n\n\n\ncredentials\n\n\nDB credentials array, is static\n\n\n\n\n\n\n\n\nTalking With Database\n\n\nThere are 4 important helper methods to run SQL queries. \n\n\n\n\nsave  - insert / update / delete record\n\n\n\n\n\n\nSave method has third optional argument \nlastInsertedId\n which if set to \ntrue\n returns last inserted id. Otherwise it returns boolean of success.\n\n\n\n\n\n\n\n\nfetch - get single row\n\n\n\n\n\n\nfetchAll - get array of results\n\n\n\n\n\n\nrunQuery - run the query\n\n\n\n\n\n\n\n\nFirst 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments \nSQL Query\n and \nArray of Parameters\n. \n\n\n\n\nIf you want to use runQuery directly you need to set third parameter \ntype\n [integer]. \n\n\n\n\n\n\n\n\ntype\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n1\n\n\nFetch All [Assoc]\n\n\n\n\n\n\n2\n\n\nFetch [Assoc]\n\n\n\n\n\n\n3\n\n\nCreate Update Delete returns boolean\n\n\n\n\n\n\n4\n\n\nCreate Update Delete returns last inserted id\n\n\n\n\n\n\n\n\n<?php\n\n\n// assuming access to extendeding model instance\n\n\n$this\n->\nmodel\n->\nsave\n(\n\"UPDATE users SET name = :name\"\n,\n \n[\n'name'\n \n=>\n \n'John'\n]);\n\n\n$this\n->\nmodel\n->\nsave\n(\n\"DELETE FROM users WHERE name = :name\"\n,\n \n[\n'name'\n \n=>\n \n'Jan'\n]);\n\n\n$this\n->\nmodel\n->\nfetch\n(\n\"SELECT * FROM users WHERE id = :id\"\n,\n \n[\n'id'\n \n=>\n \n251\n]);\n\n\n$this\n->\nmodel\n->\nfetchAll\n(\n\"SELECT * FROM users\"\n);\n\n\n\n\n\n\nOther core methods\n\n\nimage\n (received image \n, folder to upload \n)\n\n\n[this method is experimental and will be changed or removed]\n\n\nThis method is storing image records in \nimages table\n and it also calls \nImage::upload\n helper to upload the image.\n\n\nIt returns last inserted id or null if it fails.\n\n\n\n\ncountTable\n (table to count *, where clause, like clause)\n\n\nThis method counts number of records from table and you can use where or like clause to filter the results.\n\n\nReturns number of rows or null.",
             "title": "Model"
         },
         {
@@ -87,7 +92,7 @@
         },
         {
             "location": "/core/model/#talking-with-database",
-            "text": "There are 4 important helper methods to run SQL queries.    save  - insert / update / delete record    Save method has third optional argument  lastInsertedId  which if set to  true  returns last inserted id. Otherwise it returns boolean of success.     fetch - get single row    fetchAll - get array of results    runQuery - run the query     First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments  SQL Query  and  Array of Parameters .    If you want to use runQuery directly you need to set third parameter  type  [integer].      type  description      1  Fetch All [Assoc]    2  Fetch [Assoc]    3  Create Update Delete returns boolean    4  Create Update Delete returns last inserted id     // assuming access to extendeding model instance  $this->model->save(\"UPDATE users SET name = :name\", ['name' => 'John']);  $this->model->save(\"DELETE FROM users WHERE name = :name\", ['name' => 'Jan']);  $this->model->fetch(\"SELECT * FROM users WHERE id = :id\", ['id' => 251]);  $this->model->fetchAll(\"SELECT * FROM users\");",
+            "text": "There are 4 important helper methods to run SQL queries.    save  - insert / update / delete record    Save method has third optional argument  lastInsertedId  which if set to  true  returns last inserted id. Otherwise it returns boolean of success.     fetch - get single row    fetchAll - get array of results    runQuery - run the query     First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments  SQL Query  and  Array of Parameters .    If you want to use runQuery directly you need to set third parameter  type  [integer].      type  description      1  Fetch All [Assoc]    2  Fetch [Assoc]    3  Create Update Delete returns boolean    4  Create Update Delete returns last inserted id     <?php  // assuming access to extendeding model instance  $this -> model -> save ( \"UPDATE users SET name = :name\" ,   [ 'name'   =>   'John' ]);  $this -> model -> save ( \"DELETE FROM users WHERE name = :name\" ,   [ 'name'   =>   'Jan' ]);  $this -> model -> fetch ( \"SELECT * FROM users WHERE id = :id\" ,   [ 'id'   =>   251 ]);  $this -> model -> fetchAll ( \"SELECT * FROM users\" );",
             "title": "Talking With Database"
         },
         {
@@ -96,8 +101,23 @@
             "title": "Other core methods"
         },
         {
+            "location": "/core/module/",
+            "text": "m4\\m4mvc\\core\\Module\n\n\nModule\n \n\n\nParameters\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nlist\n\n\narray\n\n\nlist of modules\n\n\n\n\n\n\nactive\n\n\nstring\n\n\nactive module\n\n\n\n\n\n\n\n\nUsage\n\n\n<?php\n\n\nModule\n::\nregister\n([\n\n  \n'web'\n \n=>\n \n[\n\n    \n'render'\n  \n=>\n  \n'view'\n,\n\n    \n'folder'\n  \n=>\n  \n'theme/public'\n\n  \n],\n\n  \n'admin'\n \n=>\n \n[\n\n    \n'render'\n  \n=>\n  \n'view'\n,\n\n    \n'folder'\n  \n=>\n  \n'theme/admin'\n,\n\n    \n'beforeStart'\n \n=>\n  \nfunction\n \n()\n \n{\n\n      \nif\n \n(\n!\nisset\n(\n$_SESSION\n[\n'user_id'\n]))\n \n{\n\n        \necho\n \n'please log in'\n;\n \nexit\n;\n\n      \n}\n\n    \n}\n\n  \n],\n\n  \n'api'\n \n=>\n  \n[\n\n    \n'render'\n  \n=>\n  \n'json'\n\n  \n]\n\n\n]);",
+            "title": "Module"
+        },
+        {
+            "location": "/core/module/#parameters",
+            "text": "Name  Type  Description      list  array  list of modules    active  string  active module",
+            "title": "Parameters"
+        },
+        {
+            "location": "/core/module/#usage",
+            "text": "<?php  Module :: register ([ \n   'web'   =>   [ \n     'render'    =>    'view' , \n     'folder'    =>    'theme/public' \n   ], \n   'admin'   =>   [ \n     'render'    =>    'view' , \n     'folder'    =>    'theme/admin' , \n     'beforeStart'   =>    function   ()   { \n       if   ( ! isset ( $_SESSION [ 'user_id' ]))   { \n         echo   'please log in' ;   exit ; \n       } \n     } \n   ], \n   'api'   =>    [ \n     'render'    =>    'json' \n   ]  ]);",
+            "title": "Usage"
+        },
+        {
             "location": "/helper/string/",
-            "text": "String\n\n\nm4\\m4mvc\\helper\\Str\n\n\nStr\n helper simplifies different string tasks. All methods and properties are static.\n\n\nProperies\n\n\n\n\nlang - array of language strings to be used with \ngetLang\n method\n\n\nurl - array of url's to be used with \ngetUrl\n method\n\n\n\n\nMethods\n\n\n\n\ngetUrl\n\n\nargument\n: \nkey\n\n\ndescription\n: value will be returned based on key in \nHelper::$url\n array. If key is null it will return whole array.\n\n\n\n\ngetLang\n\n\nargument\n: \nkey\n\n\ndescription\n: value will be returned based on key in \nHelper::$lang\n array. If key is null it will return whole array.\n\n\n\n\nslugify\n\n\nargument\n: \nstring\n\n\ndescription\n - Slug will be returned of passed string. (Make me Slug) => (make-me-slug)\n\n\n\n\nremoveAccent\n\n\nargument\n: \nstring\n\n\ndescription\n - Text without accent will be returned (\u010d\u0165\u017e\u00fd\u00e1\u00ed\u00e9) => (ctzyaie)",
+            "text": "String\n\n\nm4\\m4mvc\\helper\\Str\n\n\nStr\n helper simplifies different string tasks. All methods and properties are static.\n\n\nProperies\n\n\n\n\nlang - array of language strings to be used with \ngetLang\n method\n\n\nurl - array of url's to be used with \ngetUrl\n method\n\n\n\n\nMethods\n\n\n\n\ngetUrl\n\n\nargument\n: \nkey\n\n\ndescription\n: value will be returned based on key in \nStr::$url\n array. If key is null it will return whole array.\n\n\n\n\ngetLang\n\n\nargument\n: \nkey\n\n\ndescription\n: value will be returned based on key in \nStr::$lang\n array. If key is null it will return whole array.\n\n\n\n\nslugify\n\n\nargument\n: \nstring\n\n\ndescription\n - Slug will be returned of passed string. (Make me Slug) => (make-me-slug)\n\n\n\n\nremoveAccent\n\n\nargument\n: \nstring\n\n\ndescription\n - Text without accent will be returned (\u010d\u0165\u017e\u00fd\u00e1\u00ed\u00e9) => (ctzyaie)",
             "title": "String"
         },
         {
@@ -117,12 +137,12 @@
         },
         {
             "location": "/helper/string/#geturl",
-            "text": "argument :  key  description : value will be returned based on key in  Helper::$url  array. If key is null it will return whole array.",
+            "text": "argument :  key  description : value will be returned based on key in  Str::$url  array. If key is null it will return whole array.",
             "title": "getUrl"
         },
         {
             "location": "/helper/string/#getlang",
-            "text": "argument :  key  description : value will be returned based on key in  Helper::$lang  array. If key is null it will return whole array.",
+            "text": "argument :  key  description : value will be returned based on key in  Str::$lang  array. If key is null it will return whole array.",
             "title": "getLang"
         },
         {
@@ -137,7 +157,7 @@
         },
         {
             "location": "/helper/query/",
-            "text": "Query\n\n\nm4\\m4mvc\\helper\\Query\n\n\nHelps with task of creating SQL queries. \n\n\n\n\nYou need to create instance before use, but if you extend our core Model, it holds instance of this class in \nquery\n param, so you can access it with \n$this->query\n\n\n\n\nIt works by chaining methods and then using \nbuild()\n as the last one. \n\n\nExample\n\n\n$query = $this->query->select('name', 'age')->from('users')->where('id = :id')->build();\n\n\n\n$query = $this->query->select('t.hash', 'u.name')->from('users u')->join('left', 'tokens t', 't.user_id = u.id')->limit(10)->groupBy('u.name')->orderBy('u.name DESC')->build();\n\n\n\n$query = $this->query->insert('name', 'age')->into('users')->build();\n\n\n\n$query = $this->query->update('users')->set('name', 'age')->where('id = :id');\n\n\n\n$query = $this->query->delete('users')->where('id = :id');\n\n\n\n\n\n\nMethods\n\n\nThere are 4 action types\n\n\n1. select [no argument or column strings]\n\n\nfrom\n specifies table [string]\n\nlimit\n [int or string]\n\njoin\n [type, table, on] [strings]\n\ngroupBy\n column name [string]\n\norderBy\n column name [string], type (ASC / DESC) [string] \n\n\n2. insert [no argument or column strings]\n\n\ninto\n specifies table [string]\n\n\n3. update [table name string]\n\n\nset\n list of columns to update [array]\n\n\n4. delete [table name string]\n\n\nCommon methods\n\n\nwhere\n where block [string], type: 1, 3, 4",
+            "text": "Query\n\n\nm4\\m4mvc\\helper\\Query\n\n\nHelps with task of creating SQL queries. \n\n\n\n\nYou need to create instance before use, but if you extend our core Model, it holds instance of this class in \nquery\n param, so you can access it with \n$this->query\n\n\n\n\nIt works by chaining methods and then using \nbuild()\n as the last one. \n\n\nExample\n\n\n<?php\n\n\n$query\n \n=\n \n$this\n->\nquery\n->\nselect\n(\n'name'\n,\n \n'age'\n)\n->\nfrom\n(\n'users'\n)\n->\nwhere\n(\n'id = :id'\n)\n->\nbuild\n();\n\n\n$query\n \n=\n \n$this\n->\nquery\n->\nselect\n(\n't.hash'\n,\n \n'u.name'\n)\n->\nfrom\n(\n'users u'\n)\n->\njoin\n(\n'left'\n,\n \n'tokens t'\n,\n \n't.user_id = u.id'\n)\n->\nlimit\n(\n10\n)\n->\ngroupBy\n(\n'u.name'\n)\n->\norderBy\n(\n'u.name DESC'\n)\n->\nbuild\n();\n\n\n$query\n \n=\n \n$this\n->\nquery\n->\ninsert\n(\n'name'\n,\n \n'age'\n)\n->\ninto\n(\n'users'\n)\n->\nbuild\n();\n\n\n$query\n \n=\n \n$this\n->\nquery\n->\nupdate\n(\n'users'\n)\n->\nset\n(\n'name'\n,\n \n'age'\n)\n->\nwhere\n(\n'id = :id'\n);\n\n\n$query\n \n=\n \n$this\n->\nquery\n->\ndelete\n(\n'users'\n)\n->\nwhere\n(\n'id = :id'\n);\n\n\n\n\n\n\nMethods\n\n\nThere are 4 action types\n\n\n1. select [no argument or column strings]\n\n\n\n\nfrom\n specifies table [string]\n\n\nlimit\n [int or string]\n\n\njoin\n [type, table, on] [strings]\n\n\ngroupBy\n column name [string]\n\n\norderBy\n column name [string], type (ASC / DESC) [string] \n\n\n\n\n\n\n2. insert [no argument or column strings]\n\n\n\n\ninto\n specifies table [string]\n\n\n\n\n\n\n3. update [table name string]\n\n\n\n\nset\n list of columns to update [array]\n\n\n\n\n\n\n4. delete [table name string]\n\n\n\n\nCommon methods\n\n\n\n\nwhere\n where block [string], type: 1, 3, 4",
             "title": "Query"
         },
         {
@@ -147,7 +167,7 @@
         },
         {
             "location": "/helper/query/#example",
-            "text": "$query = $this->query->select('name', 'age')->from('users')->where('id = :id')->build();  $query = $this->query->select('t.hash', 'u.name')->from('users u')->join('left', 'tokens t', 't.user_id = u.id')->limit(10)->groupBy('u.name')->orderBy('u.name DESC')->build();  $query = $this->query->insert('name', 'age')->into('users')->build();  $query = $this->query->update('users')->set('name', 'age')->where('id = :id');  $query = $this->query->delete('users')->where('id = :id');",
+            "text": "<?php  $query   =   $this -> query -> select ( 'name' ,   'age' ) -> from ( 'users' ) -> where ( 'id = :id' ) -> build ();  $query   =   $this -> query -> select ( 't.hash' ,   'u.name' ) -> from ( 'users u' ) -> join ( 'left' ,   'tokens t' ,   't.user_id = u.id' ) -> limit ( 10 ) -> groupBy ( 'u.name' ) -> orderBy ( 'u.name DESC' ) -> build ();  $query   =   $this -> query -> insert ( 'name' ,   'age' ) -> into ( 'users' ) -> build ();  $query   =   $this -> query -> update ( 'users' ) -> set ( 'name' ,   'age' ) -> where ( 'id = :id' );  $query   =   $this -> query -> delete ( 'users' ) -> where ( 'id = :id' );",
             "title": "Example"
         },
         {
@@ -157,7 +177,7 @@
         },
         {
             "location": "/helper/query/#1-select-no-argument-or-column-strings",
-            "text": "from  specifies table [string] limit  [int or string] join  [type, table, on] [strings] groupBy  column name [string] orderBy  column name [string], type (ASC / DESC) [string]",
+            "text": "from  specifies table [string]  limit  [int or string]  join  [type, table, on] [strings]  groupBy  column name [string]  orderBy  column name [string], type (ASC / DESC) [string]",
             "title": "1. select [no argument or column strings]"
         },
         {
@@ -179,6 +199,86 @@
             "location": "/helper/query/#common-methods",
             "text": "where  where block [string], type: 1, 3, 4",
             "title": "Common methods"
+        },
+        {
+            "location": "/helper/redirect/",
+            "text": "Redirect\n\n\nm4\\m4mvc\\helper\\Redirect\n\n\nMethods\n\n\nto\n\n\narguments\n: string $url\n\ndescription\n: redirects to url\n\n\n\n\ntoUrl\n\n\narguments\n: string $key\n\ndescription\n: requires Str::$url array to be set, redirects to choosen url from that array.",
+            "title": "Redirect"
+        },
+        {
+            "location": "/helper/redirect/#redirect",
+            "text": "m4\\m4mvc\\helper\\Redirect",
+            "title": "Redirect"
+        },
+        {
+            "location": "/helper/redirect/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/helper/redirect/#to",
+            "text": "arguments : string $url description : redirects to url",
+            "title": "to"
+        },
+        {
+            "location": "/helper/redirect/#tourl",
+            "text": "arguments : string $key description : requires Str::$url array to be set, redirects to choosen url from that array.",
+            "title": "toUrl"
+        },
+        {
+            "location": "/helper/request/",
+            "text": "Request\n\n\nm4\\m4mvc\\helper\\Request\n\n\nMethods\n\n\n\n\nforceMethod\n\n\nargument\n: \nstring|array\n type or list of types\n\n\ntype\n: static\n\n\nreturns\n: error if message if method is not allowed, or true\n\n\nusage\n:\n\n\n<?php\n \nRequest\n::\nforceMethod\n(\n'post'\n);\n \n?>\n\n\n\n\n\n\n\n\nrequired\n\n\narguments\n: \nstrings\n required parameters of request.\n\n\ntype\n: static\n\n\nreturns\n: error if required data not found, or true\n\n\nusage\n:\n\n\n<?php\n \nRequest\n::\nrequired\n(\n'id'\n,\n \n'username'\n,\n \n'password'\n);\n \n?>\n\n\n\n\n\n\n\n\nhandle\n\n\ntype\n: static\n\n\ndescription\n:  adds POST or GET request data to Request::data parameter. \n\n\nreturns\n: parseUrl()\n\n\nusage\n:\n\n\n<?php\n \n$url\n \n=\n \nRequest\n::\nhandle\n();\n \n?>\n\n\n\n\n\n\n\n\ngetRequestType\n\n\ntype\n: static\n\n\nreturns\n: request method\n\n\nusage\n:\n\n\n<?php\n \n$requestType\n \n=\n \nRequest\n::\ngetRequestType\n();\n \n?>\n\n\n\n\n\n\n\n\njsonPost\n\n\ntype\n: static\n\n\nreturns\n: array, json Post content\n\n\n\n\nselect\n\n\narguments\n: array keys to select\n\ntype\n: static\n\nreturns\n: array of data\n\nusage\n\n\n<?php\n \n$data\n \n=\n \nRequest\n::\nselect\n(\n'username'\n,\n \n'password'\n);\n \n?>\n\n\n\n\n\n\n\n\nparseUrl\n\n\nreturns\n: parsed \n$_GET['url']\n, array\n\n\n\n\nmapUrl\n\n\nargument\n: array\n\n\ndescription\n: changes GET['url']\n\n\nusage\n: \n\n\n<?php\n \n\nRequest\n::\nmapUrl\n([\n\n  \n'cm'\n        \n=>\n \n'controller/method'\n,\n\n  \n'register'\n  \n=>\n  \n'users/register'\n\n\n]);\n\n\n?>",
+            "title": "Request"
+        },
+        {
+            "location": "/helper/request/#request",
+            "text": "m4\\m4mvc\\helper\\Request",
+            "title": "Request"
+        },
+        {
+            "location": "/helper/request/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/helper/request/#forcemethod",
+            "text": "argument :  string|array  type or list of types  type : static  returns : error if message if method is not allowed, or true  usage :  <?php   Request :: forceMethod ( 'post' );   ?>",
+            "title": "forceMethod"
+        },
+        {
+            "location": "/helper/request/#required",
+            "text": "arguments :  strings  required parameters of request.  type : static  returns : error if required data not found, or true  usage :  <?php   Request :: required ( 'id' ,   'username' ,   'password' );   ?>",
+            "title": "required"
+        },
+        {
+            "location": "/helper/request/#handle",
+            "text": "type : static  description :  adds POST or GET request data to Request::data parameter.   returns : parseUrl()  usage :  <?php   $url   =   Request :: handle ();   ?>",
+            "title": "handle"
+        },
+        {
+            "location": "/helper/request/#getrequesttype",
+            "text": "type : static  returns : request method  usage :  <?php   $requestType   =   Request :: getRequestType ();   ?>",
+            "title": "getRequestType"
+        },
+        {
+            "location": "/helper/request/#jsonpost",
+            "text": "type : static  returns : array, json Post content",
+            "title": "jsonPost"
+        },
+        {
+            "location": "/helper/request/#select",
+            "text": "arguments : array keys to select type : static returns : array of data usage  <?php   $data   =   Request :: select ( 'username' ,   'password' );   ?>",
+            "title": "select"
+        },
+        {
+            "location": "/helper/request/#parseurl",
+            "text": "returns : parsed  $_GET['url'] , array",
+            "title": "parseUrl"
+        },
+        {
+            "location": "/helper/request/#mapurl",
+            "text": "argument : array  description : changes GET['url']  usage :   <?php   Request :: mapUrl ([ \n   'cm'          =>   'controller/method' , \n   'register'    =>    'users/register'  ]);  ?>",
+            "title": "mapUrl"
         }
     ]
 }
