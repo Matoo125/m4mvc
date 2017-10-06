@@ -72,6 +72,10 @@
           
             
               
+                <span class="md-header-nav__parent">
+                  Core
+                </span>
+              
             
             App
           
@@ -147,6 +151,27 @@
   
 
 
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Core
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Core
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
@@ -171,6 +196,13 @@
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simple-usage" title="Simple usage" class="md-nav__link">
+    Simple usage
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#step-by-step" title="Step by Step" class="md-nav__link">
@@ -208,10 +240,10 @@
     
   </li>
 
-    
-      
-      
-      
+        
+          
+          
+          
 
 
   <li class="md-nav__item">
@@ -220,16 +252,69 @@
     </a>
   </li>
 
-    
-      
-      
-      
+        
+          
+          
+          
 
 
   <li class="md-nav__item">
     <a href="../model/" title="Model" class="md-nav__link">
       Model
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Helpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/string/" title="String" class="md-nav__link">
+      String
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/query/" title="Query" class="md-nav__link">
+      Query
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -252,6 +337,13 @@
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simple-usage" title="Simple usage" class="md-nav__link">
+    Simple usage
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#step-by-step" title="Step by Step" class="md-nav__link">
@@ -298,7 +390,26 @@
                 
                 <h1 id="app">App</h1>
 <p><code>m4\m4mvc\core\App</code></p>
-<p><a href="https://github.com/Matoo125/M4CMS/blob/master/app/core/App.php">App</a> is the most important file of this application. It functions as a router: parses URL, creates instance of <a href="../Framework/Controller">Controller</a>, calls Method and matches View or just outputs JSON.</p>
+<p><a href="https://github.com/Matoo125/M4CMS/blob/master/app/core/App.php">App</a> It functions as a router: parses URL, creates instance of <a href="../Framework/Controller">Controller</a>, calls Method and matches View or just outputs JSON.</p>
+<h2 id="simple-usage">Simple usage</h2>
+<div class="codehilite"><pre><span></span><span class="x">$app = new App;</span>
+
+<span class="x">$app-&gt;run()</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="x">// change paths</span>
+<span class="x">$app-&gt;paths = [</span>
+<span class="x">  &#39;controller&#39;  =&gt;  &#39;myControllers&#39;, // folder for controllers</span>
+<span class="x">  &#39;model&#39;       =&gt;  &#39;myModel&#39;, // folder for models</span>
+<span class="x">  &#39;app&#39;         =&gt;  &#39;myApp&#39; // app root</span>
+<span class="x">];</span>
+
+<span class="x">// set namespace</span>
+<span class="x">$app-&gt;settings[&#39;namespace&#39;] = &quot;MyApp&quot;; </span>
+</pre></div>
+
+
 <h2 id="step-by-step">Step by Step</h2>
 <ol>
 <li>Parse URL (create array from URL string received as <code>$_GET['url']</code> parameter).</li>
@@ -308,16 +419,16 @@
 </blockquote>
 <ol>
 <li>
-<p>Sets Module, module is represented as folder in the controllers path, first parameter of URL, if not set default module will be used.</p>
+<p>Sets Module, if registered.</p>
 </li>
 <li>
 <p>Initializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.</p>
 </li>
 <li>
-<p>Calls Method, if not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.</p>
+<p>Calls Method. If not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.</p>
 </li>
 <li>
-<p>If there are still some remaining parts of URL array, they will be passed as parameters to the method call and can be caught in method itself</p>
+<p>If there are still some remaining parts of URL array, they will be passed as parameters to the method.</p>
 </li>
 <li>
 <p>Calls view based on <code>module/controller/method</code> path in <code>app/views</code> folder</p>
@@ -325,12 +436,12 @@
 </ol>
 <h2 id="url">URL</h2>
 <ul>
-<li>module [default: api],[sets module to be used], [e.g: api, admin, web]</li>
+<li>module [have to be registered]</li>
 <li>controller [default: Home], [sets the controller to be initialized]</li>
 <li>method [default: Index], [sets the method to be called]</li>
 <li>params [default: empty array], [parameters to be passed to method]</li>
 </ul>
-<p>All those properties are set from url, but you can change their default value, before run call</p>
+<p>All those properties are set from url, and you can change their default value, before calling run.</p>
 <h2 id="api">API</h2>
 <table>
 <thead>
@@ -343,13 +454,18 @@
 <tbody>
 <tr>
 <td>$paths['controllers']</td>
-<td></td>
+<td>controllers</td>
 <td>path to your controllers</td>
 </tr>
 <tr>
-<td>$path['views']</td>
-<td>false</td>
-<td>path to view, if set to false, it will not look for a view and outputs json.</td>
+<td>$paths['model']</td>
+<td>model</td>
+<td>path to your models</td>
+</tr>
+<tr>
+<td>$paths['app']</td>
+<td>app</td>
+<td>path to your app</td>
 </tr>
 <tr>
 <td>$settings['viewExtension']</td>
@@ -387,12 +503,8 @@
 <td>Calls <code>edit</code> method with <code>my-first-post</code> parameter of <code>posts</code> controller in <code>admin</code> module and matches view.</td>
 </tr>
 <tr>
-<td>/api/posts/edit/my-second-post</td>
-<td>The same as before, but <code>returns JSON</code></td>
-</tr>
-<tr>
 <td>/posts/edit-my-third-post</td>
-<td>This one <code>uses the default module [api]</code>, so it does not have to be in url.</td>
+<td>This one <code>uses the default module</code>, so it does not have to be in url.</td>
 </tr>
 <tr>
 <td>/</td>

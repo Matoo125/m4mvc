@@ -16,7 +16,7 @@
     
     
       
-        <title>Model - M4MVC</title>
+        <title>String - M4MVC</title>
       
     
     
@@ -73,11 +73,11 @@
             
               
                 <span class="md-header-nav__parent">
-                  Core
+                  Helpers
                 </span>
               
             
-            Model
+            String
           
         </span>
       </div>
@@ -148,12 +148,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       Core
@@ -171,7 +169,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../app/" title="App" class="md-nav__link">
+    <a href="../../core/app/" title="App" class="md-nav__link">
       App
     </a>
   </li>
@@ -183,11 +181,49 @@
 
 
   <li class="md-nav__item">
-    <a href="../controller/" title="Controller" class="md-nav__link">
+    <a href="../../core/controller/" title="Controller" class="md-nav__link">
       Controller
     </a>
   </li>
 
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/model/" title="Model" class="md-nav__link">
+      Model
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Helpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -204,11 +240,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Model
+        String
       </label>
     
-    <a href="./" title="Model" class="md-nav__link md-nav__link--active">
-      Model
+    <a href="./" title="String" class="md-nav__link md-nav__link--active">
+      String
     </a>
     
       
@@ -222,23 +258,50 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parameters" title="Parameters" class="md-nav__link">
-    Parameters
+  <a href="#properies" title="Properies" class="md-nav__link">
+    Properies
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#talking-with-database" title="Talking With Database" class="md-nav__link">
-    Talking With Database
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geturl" title="getUrl" class="md-nav__link">
+    getUrl
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#other-core-methods" title="Other core methods" class="md-nav__link">
-    Other core methods
+        
+          <li class="md-nav__item">
+  <a href="#getlang" title="getLang" class="md-nav__link">
+    getLang
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slugify" title="slugify" class="md-nav__link">
+    slugify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeaccent" title="removeAccent" class="md-nav__link">
+    removeAccent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -251,49 +314,13 @@
   </li>
 
         
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      Helpers
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        Helpers
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
           
           
           
 
 
   <li class="md-nav__item">
-    <a href="../../helper/string/" title="String" class="md-nav__link">
-      String
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../helper/query/" title="Query" class="md-nav__link">
+    <a href="../query/" title="Query" class="md-nav__link">
       Query
     </a>
   </li>
@@ -325,23 +352,50 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parameters" title="Parameters" class="md-nav__link">
-    Parameters
+  <a href="#properies" title="Properies" class="md-nav__link">
+    Properies
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#talking-with-database" title="Talking With Database" class="md-nav__link">
-    Talking With Database
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geturl" title="getUrl" class="md-nav__link">
+    getUrl
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#other-core-methods" title="Other core methods" class="md-nav__link">
-    Other core methods
+        
+          <li class="md-nav__item">
+  <a href="#getlang" title="getLang" class="md-nav__link">
+    getLang
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slugify" title="slugify" class="md-nav__link">
+    slugify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeaccent" title="removeAccent" class="md-nav__link">
+    removeAccent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -360,101 +414,31 @@
               
                 
                 
-                <h1 id="model">Model</h1>
-<p><code>m4\m4mvc\core\Model</code></p>
-<p><a href="https://github.com/Matoo125/M4CMS/blob/master/app/core/Model.php">Abstract model class</a> is intended to be extended by all the other models.</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Holds Query Helper Instance</td>
-</tr>
-<tr>
-<td>db</td>
-<td>Holds database connection</td>
-</tr>
-<tr>
-<td>credentials</td>
-<td>DB credentials array, is static</td>
-</tr>
-</tbody>
-</table>
-<h3 id="talking-with-database">Talking With Database</h3>
-<p>There are 4 important helper methods to run SQL queries. </p>
+                <h1 id="string">String</h1>
+<p><code>m4\m4mvc\helper\Str</code></p>
+<p><a href="https://github.com/Matoo125/m4mvc/blob/master/src/helper/Str.php">Str</a> helper simplifies different string tasks. All methods and properties are static.</p>
+<h2 id="properies">Properies</h2>
 <ol>
-<li>save  - insert / update / delete record</li>
+<li>lang - array of language strings to be used with <code>getLang</code> method</li>
+<li>url - array of url's to be used with <code>getUrl</code> method</li>
 </ol>
-<blockquote>
-<p>Save method has third optional argument <code>lastInsertedId</code> which if set to <code>true</code> returns last inserted id. Otherwise it returns boolean of success.</p>
-</blockquote>
-<ol>
-<li>
-<p>fetch - get single row</p>
-</li>
-<li>
-<p>fetchAll - get array of results</p>
-</li>
-<li>
-<p>runQuery - run the query</p>
-</li>
-</ol>
-<blockquote>
-<p>First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments <strong>SQL Query</strong> and <strong>Array of Parameters</strong>. </p>
-</blockquote>
-<p>If you want to use runQuery directly you need to set third parameter <strong>type</strong> [integer]. </p>
-<table>
-<thead>
-<tr>
-<th>type</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Fetch All [Assoc]</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Fetch [Assoc]</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Create Update Delete returns boolean</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Create Update Delete returns last inserted id</td>
-</tr>
-</tbody>
-</table>
-<div class="codehilite"><pre><span></span><span class="x">// assuming access to extendeding model instance</span>
-<span class="x">$this-&gt;model-&gt;save(&quot;UPDATE users SET name = :name&quot;, [&#39;name&#39; =&gt; &#39;John&#39;]);</span>
-
-<span class="x">$this-&gt;model-&gt;save(&quot;DELETE FROM users WHERE name = :name&quot;, [&#39;name&#39; =&gt; &#39;Jan&#39;]);</span>
-
-<span class="x">$this-&gt;model-&gt;fetch(&quot;SELECT * FROM users WHERE id = :id&quot;, [&#39;id&#39; =&gt; 251]);</span>
-
-<span class="x">$this-&gt;model-&gt;fetchAll(&quot;SELECT * FROM users&quot;);</span>
-</pre></div>
-
-
-<h3 id="other-core-methods">Other core methods</h3>
-<p><strong>image</strong> (received image <em>, folder to upload </em>)</p>
-<p>[this method is experimental and will be changed or removed]</p>
-<p>This method is storing image records in <code>images table</code> and it also calls <code>Image::upload</code> helper to upload the image.</p>
-<p>It returns last inserted id or null if it fails.</p>
+<h2 id="methods">Methods</h2>
 <hr />
-<p><strong>countTable</strong> (table to count *, where clause, like clause)</p>
-<p>This method counts number of records from table and you can use where or like clause to filter the results.</p>
-<p>Returns number of rows or null.</p>
+<h3 id="geturl">getUrl</h3>
+<p><strong>argument</strong>: <em>key</em></p>
+<p><strong>description</strong>: value will be returned based on key in <code>Helper::$url</code> array. If key is null it will return whole array.</p>
+<hr />
+<h3 id="getlang">getLang</h3>
+<p><strong>argument</strong>: <em>key</em></p>
+<p><strong>description</strong>: value will be returned based on key in <code>Helper::$lang</code> array. If key is null it will return whole array.</p>
+<hr />
+<h3 id="slugify">slugify</h3>
+<p><strong>argument</strong>: <em>string</em></p>
+<p><strong>description</strong> - Slug will be returned of passed string. (Make me Slug) =&gt; (make-me-slug)</p>
+<hr />
+<h3 id="removeaccent">removeAccent</h3>
+<p><strong>argument</strong>: <em>string</em></p>
+<p><strong>description</strong> - Text without accent will be returned (čťžýáíé) =&gt; (ctzyaie)</p>
                 
                   
                 
@@ -473,7 +457,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../controller/" title="Controller" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../core/model/" title="Model" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -482,19 +466,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Controller
+                Model
               </span>
             </div>
           </a>
         
         
-          <a href="../../helper/string/" title="String" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../query/" title="Query" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                String
+                Query
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

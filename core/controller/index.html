@@ -72,6 +72,10 @@
           
             
               
+                <span class="md-header-nav__parent">
+                  Core
+                </span>
+              
             
             Controller
           
@@ -144,6 +148,27 @@
       
       
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Core
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Core
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
 
   <li class="md-nav__item">
     <a href="../app/" title="App" class="md-nav__link">
@@ -151,10 +176,10 @@
     </a>
   </li>
 
-    
-      
-      
-      
+        
+          
+          
+          
 
   
 
@@ -213,16 +238,69 @@
     
   </li>
 
-    
-      
-      
-      
+        
+          
+          
+          
 
 
   <li class="md-nav__item">
     <a href="../model/" title="Model" class="md-nav__link">
       Model
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Helpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/string/" title="String" class="md-nav__link">
+      String
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../helper/query/" title="Query" class="md-nav__link">
+      Query
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -325,14 +403,16 @@
 </table>
 <h2 id="usage">Usage</h2>
 <p>All those calls should be made from controller which extends this.</p>
-<p>To set controller</p>
-<pre><code class="php">$this-&gt;model = $this-&gt;getModel('Name')
-// for this to work modelNamespace has to be set
-</code></pre>
+<p>To set model</p>
+<div class="codehilite"><pre><span></span><span class="x">$this-&gt;model = $this-&gt;getModel(&#39;Name&#39;)</span>
+<span class="x">// for this to work modelNamespace has to be set</span>
+</pre></div>
+
 
 <p>Set data</p>
-<pre><code class="php">$this-&gt;data['key'] = 'value';
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="x">$this-&gt;data[&#39;key&#39;] = &#39;value&#39;;</span>
+</pre></div>
+
 
 <h2 id="rendering">Rendering</h2>
 <p>There are 3 default render functions. render, renderTwig and json.</p>

@@ -12,37 +12,42 @@
         },
         {
             "location": "/core/app/",
-            "text": "App\n\n\nm4\\m4mvc\\core\\App\n\n\nApp\n is the most important file of this application. It functions as a router: parses URL, creates instance of \nController\n, calls Method and matches View or just outputs JSON.\n\n\nStep by Step\n\n\n\n\nParse URL (create array from URL string received as \n$_GET['url']\n parameter).\n\n\n\n\n\n\nSo we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit\n\n\n\n\n\n\n\n\nSets Module, module is represented as folder in the controllers path, first parameter of URL, if not set default module will be used.\n\n\n\n\n\n\nInitializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.\n\n\n\n\n\n\nCalls Method, if not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.\n\n\n\n\n\n\nIf there are still some remaining parts of URL array, they will be passed as parameters to the method call and can be caught in method itself\n\n\n\n\n\n\nCalls view based on \nmodule/controller/method\n path in \napp/views\n folder\n\n\n\n\n\n\nURL\n\n\n\n\nmodule [default: api],[sets module to be used], [e.g: api, admin, web]\n\n\ncontroller [default: Home], [sets the controller to be initialized]\n\n\nmethod [default: Index], [sets the method to be called]\n\n\nparams [default: empty array], [parameters to be passed to method]\n\n\n\n\nAll those properties are set from url, but you can change their default value, before run call\n\n\nAPI\n\n\n\n\n\n\n\n\nname\n\n\ndefault value\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n$paths['controllers']\n\n\n\n\npath to your controllers\n\n\n\n\n\n\n$path['views']\n\n\nfalse\n\n\npath to view, if set to false, it will not look for a view and outputs json.\n\n\n\n\n\n\n$settings['viewExtension']\n\n\nphp\n\n\nused only if views are used, extension of a view file.\n\n\n\n\n\n\n$settings['renderFunction']\n\n\nrender\n\n\nrender function to be called (render, renderTwig), again only if views are used.\n\n\n\n\n\n\n$settings['namespace']\n\n\napp\n\n\nnamespace of your app\n\n\n\n\n\n\n\n\nAll those properties have to be set correctly before app is run .\n\n\nExample Requests\n\n\n\n\n\n\n\n\nRoute\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n/module/controller/method/param1/.../paramN\n\n\nIdeal URL Structure\n\n\n\n\n\n\n/admin/posts/edit/my-first-post\n\n\nCalls \nedit\n method with \nmy-first-post\n parameter of \nposts\n controller in \nadmin\n module and matches view.\n\n\n\n\n\n\n/api/posts/edit/my-second-post\n\n\nThe same as before, but \nreturns JSON\n\n\n\n\n\n\n/posts/edit-my-third-post\n\n\nThis one \nuses the default module [api]\n, so it does not have to be in url.\n\n\n\n\n\n\n/\n\n\nThis calls default module, default controller and default method with no parameters.",
+            "text": "App\n\n\nm4\\m4mvc\\core\\App\n\n\nApp\n It functions as a router: parses URL, creates instance of \nController\n, calls Method and matches View or just outputs JSON.\n\n\nSimple usage\n\n\n$app = new App;\n\n\n\n$app->run()\n\n\n\n\n\n\n// change paths\n\n\n$app->paths = [\n\n\n  'controller'  =>  'myControllers', // folder for controllers\n\n\n  'model'       =>  'myModel', // folder for models\n\n\n  'app'         =>  'myApp' // app root\n\n\n];\n\n\n\n// set namespace\n\n\n$app->settings['namespace'] = \"MyApp\"; \n\n\n\n\n\n\nStep by Step\n\n\n\n\nParse URL (create array from URL string received as \n$_GET['url']\n parameter).\n\n\n\n\n\n\nSo we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit\n\n\n\n\n\n\n\n\nSets Module, if registered.\n\n\n\n\n\n\nInitializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.\n\n\n\n\n\n\nCalls Method. If not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.\n\n\n\n\n\n\nIf there are still some remaining parts of URL array, they will be passed as parameters to the method.\n\n\n\n\n\n\nCalls view based on \nmodule/controller/method\n path in \napp/views\n folder\n\n\n\n\n\n\nURL\n\n\n\n\nmodule [have to be registered]\n\n\ncontroller [default: Home], [sets the controller to be initialized]\n\n\nmethod [default: Index], [sets the method to be called]\n\n\nparams [default: empty array], [parameters to be passed to method]\n\n\n\n\nAll those properties are set from url, and you can change their default value, before calling run.\n\n\nAPI\n\n\n\n\n\n\n\n\nname\n\n\ndefault value\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n$paths['controllers']\n\n\ncontrollers\n\n\npath to your controllers\n\n\n\n\n\n\n$paths['model']\n\n\nmodel\n\n\npath to your models\n\n\n\n\n\n\n$paths['app']\n\n\napp\n\n\npath to your app\n\n\n\n\n\n\n$settings['viewExtension']\n\n\nphp\n\n\nused only if views are used, extension of a view file.\n\n\n\n\n\n\n$settings['renderFunction']\n\n\nrender\n\n\nrender function to be called (render, renderTwig), again only if views are used.\n\n\n\n\n\n\n$settings['namespace']\n\n\napp\n\n\nnamespace of your app\n\n\n\n\n\n\n\n\nAll those properties have to be set correctly before app is run .\n\n\nExample Requests\n\n\n\n\n\n\n\n\nRoute\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n/module/controller/method/param1/.../paramN\n\n\nIdeal URL Structure\n\n\n\n\n\n\n/admin/posts/edit/my-first-post\n\n\nCalls \nedit\n method with \nmy-first-post\n parameter of \nposts\n controller in \nadmin\n module and matches view.\n\n\n\n\n\n\n/posts/edit-my-third-post\n\n\nThis one \nuses the default module\n, so it does not have to be in url.\n\n\n\n\n\n\n/\n\n\nThis calls default module, default controller and default method with no parameters.",
             "title": "App"
         },
         {
             "location": "/core/app/#app",
-            "text": "m4\\m4mvc\\core\\App  App  is the most important file of this application. It functions as a router: parses URL, creates instance of  Controller , calls Method and matches View or just outputs JSON.",
+            "text": "m4\\m4mvc\\core\\App  App  It functions as a router: parses URL, creates instance of  Controller , calls Method and matches View or just outputs JSON.",
             "title": "App"
         },
         {
+            "location": "/core/app/#simple-usage",
+            "text": "$app = new App;  $app->run()   // change paths  $app->paths = [    'controller'  =>  'myControllers', // folder for controllers    'model'       =>  'myModel', // folder for models    'app'         =>  'myApp' // app root  ];  // set namespace  $app->settings['namespace'] = \"MyApp\";",
+            "title": "Simple usage"
+        },
+        {
             "location": "/core/app/#step-by-step",
-            "text": "Parse URL (create array from URL string received as  $_GET['url']  parameter).    So we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit     Sets Module, module is represented as folder in the controllers path, first parameter of URL, if not set default module will be used.    Initializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.    Calls Method, if not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.    If there are still some remaining parts of URL array, they will be passed as parameters to the method call and can be caught in method itself    Calls view based on  module/controller/method  path in  app/views  folder",
+            "text": "Parse URL (create array from URL string received as  $_GET['url']  parameter).    So we receive request like index.php?url=admin/page/edit, but we can use .htaccess to adjust it to /admin/page/edit     Sets Module, if registered.    Initializes Controller and if it does not exists it will call default controller, first parameter of URL for default module, otherwise second.    Calls Method. If not set or found it will call default method and if it does not exists it will throw error, second or third parameter of the URL.    If there are still some remaining parts of URL array, they will be passed as parameters to the method.    Calls view based on  module/controller/method  path in  app/views  folder",
             "title": "Step by Step"
         },
         {
             "location": "/core/app/#url",
-            "text": "module [default: api],[sets module to be used], [e.g: api, admin, web]  controller [default: Home], [sets the controller to be initialized]  method [default: Index], [sets the method to be called]  params [default: empty array], [parameters to be passed to method]   All those properties are set from url, but you can change their default value, before run call",
+            "text": "module [have to be registered]  controller [default: Home], [sets the controller to be initialized]  method [default: Index], [sets the method to be called]  params [default: empty array], [parameters to be passed to method]   All those properties are set from url, and you can change their default value, before calling run.",
             "title": "URL"
         },
         {
             "location": "/core/app/#api",
-            "text": "name  default value  description      $paths['controllers']   path to your controllers    $path['views']  false  path to view, if set to false, it will not look for a view and outputs json.    $settings['viewExtension']  php  used only if views are used, extension of a view file.    $settings['renderFunction']  render  render function to be called (render, renderTwig), again only if views are used.    $settings['namespace']  app  namespace of your app     All those properties have to be set correctly before app is run .",
+            "text": "name  default value  description      $paths['controllers']  controllers  path to your controllers    $paths['model']  model  path to your models    $paths['app']  app  path to your app    $settings['viewExtension']  php  used only if views are used, extension of a view file.    $settings['renderFunction']  render  render function to be called (render, renderTwig), again only if views are used.    $settings['namespace']  app  namespace of your app     All those properties have to be set correctly before app is run .",
             "title": "API"
         },
         {
             "location": "/core/app/#example-requests",
-            "text": "Route  Description      /module/controller/method/param1/.../paramN  Ideal URL Structure    /admin/posts/edit/my-first-post  Calls  edit  method with  my-first-post  parameter of  posts  controller in  admin  module and matches view.    /api/posts/edit/my-second-post  The same as before, but  returns JSON    /posts/edit-my-third-post  This one  uses the default module [api] , so it does not have to be in url.    /  This calls default module, default controller and default method with no parameters.",
+            "text": "Route  Description      /module/controller/method/param1/.../paramN  Ideal URL Structure    /admin/posts/edit/my-first-post  Calls  edit  method with  my-first-post  parameter of  posts  controller in  admin  module and matches view.    /posts/edit-my-third-post  This one  uses the default module , so it does not have to be in url.    /  This calls default module, default controller and default method with no parameters.",
             "title": "Example Requests"
         },
         {
             "location": "/core/controller/",
-            "text": "Controller\n\n\nm4\\m4mvc\\core\\Controller\n\n\nThis\n is \nAbstract\n Controller \nClass\n which is intended to be extended by every controller.\n\n\nYou might create your own base controller, which extends this controller.\n\n\nProperties\n\n\n\n\n\n\n\n\nname\n\n\ndescription\n\n\nnote\n\n\n\n\n\n\n\n\n\n\nmodel\n\n\nto store model object\n\n\n\n\n\n\n\n\nmodelNamespace\n\n\nname space to access model\n\n\nThis can be set in App->db function\n\n\n\n\n\n\nview\n\n\npath to view\n\n\nuse this if you do not want default module/controller/method path\n\n\n\n\n\n\ndata\n\n\nData to be passed to view or outputted\n\n\n[]\n\n\n\n\n\n\nresponse\n\n\nStatic version of data\n\n\nThis is used by Response helper\n\n\n\n\n\n\n\n\nUsage\n\n\nAll those calls should be made from controller which extends this.\n\n\nTo set controller\n\n\n$this->model = $this->getModel('Name')\n// for this to work modelNamespace has to be set\n\n\n\n\nSet data\n\n\n$this->data['key'] = 'value';\n\n\n\n\nRendering\n\n\nThere are 3 default render functions. render, renderTwig and json.\n\n\n\n\njson outputs pure json from data + response arrays\n\n\nrenderTwig renders twig file \n\n\nrender is for pure PHP view\n\n\n\n\nyou can write your own render function by creating your own base controller and then passing function name to $app->settings['renderFunction']",
+            "text": "Controller\n\n\nm4\\m4mvc\\core\\Controller\n\n\nThis\n is \nAbstract\n Controller \nClass\n which is intended to be extended by every controller.\n\n\nYou might create your own base controller, which extends this controller.\n\n\nProperties\n\n\n\n\n\n\n\n\nname\n\n\ndescription\n\n\nnote\n\n\n\n\n\n\n\n\n\n\nmodel\n\n\nto store model object\n\n\n\n\n\n\n\n\nmodelNamespace\n\n\nname space to access model\n\n\nThis can be set in App->db function\n\n\n\n\n\n\nview\n\n\npath to view\n\n\nuse this if you do not want default module/controller/method path\n\n\n\n\n\n\ndata\n\n\nData to be passed to view or outputted\n\n\n[]\n\n\n\n\n\n\nresponse\n\n\nStatic version of data\n\n\nThis is used by Response helper\n\n\n\n\n\n\n\n\nUsage\n\n\nAll those calls should be made from controller which extends this.\n\n\nTo set model\n\n\n$this->model = $this->getModel('Name')\n\n\n// for this to work modelNamespace has to be set\n\n\n\n\n\n\nSet data\n\n\n$this->data['key'] = 'value';\n\n\n\n\n\n\nRendering\n\n\nThere are 3 default render functions. render, renderTwig and json.\n\n\n\n\njson outputs pure json from data + response arrays\n\n\nrenderTwig renders twig file \n\n\nrender is for pure PHP view\n\n\n\n\nyou can write your own render function by creating your own base controller and then passing function name to $app->settings['renderFunction']",
             "title": "Controller"
         },
         {
@@ -57,7 +62,7 @@
         },
         {
             "location": "/core/controller/#usage",
-            "text": "All those calls should be made from controller which extends this.  To set controller  $this->model = $this->getModel('Name')\n// for this to work modelNamespace has to be set  Set data  $this->data['key'] = 'value';",
+            "text": "All those calls should be made from controller which extends this.  To set model  $this->model = $this->getModel('Name')  // for this to work modelNamespace has to be set   Set data  $this->data['key'] = 'value';",
             "title": "Usage"
         },
         {
@@ -67,7 +72,7 @@
         },
         {
             "location": "/core/model/",
-            "text": "Model\n\n\nm4\\m4mvc\\core\\Model\n\n\nAbstract model class\n is intended to be extended by all the other models.\n\n\nParameters\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nquery\n\n\nHolds Query Helper Instance\n\n\n\n\n\n\ndb\n\n\nHolds database connection\n\n\n\n\n\n\n\n\nTalking With Database\n\n\nThere are 4 important helper methods to run SQL queries. \n\n\n\n\nsave  - insert / update / delete record\n\n\n\n\n\n\nSave method has third optional argument \nlastInsertedId\n which if set to \ntrue\n returns last inserted id. Otherwise it returns boolean of success.\n\n\n\n\n\n\n\n\nfetch - get single row\n\n\n\n\n\n\nfetchAll - get array of results\n\n\n\n\n\n\nrunQuery - run the query\n\n\n\n\n\n\n\n\nFirst 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments \nSQL Query\n and \nArray of Parameters\n. \n\n\n\n\nIf you want to use runQuery directly you need to set third parameter \ntype\n [integer]. \n\n\n\n\n\n\n\n\ntype\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n1\n\n\nFetch All [Assoc]\n\n\n\n\n\n\n2\n\n\nFetch [Assoc]\n\n\n\n\n\n\n3\n\n\nCreate Update Delete returns boolean\n\n\n\n\n\n\n4\n\n\nCreate Update Delete returns last inserted id\n\n\n\n\n\n\n\n\nOther core methods\n\n\nimage\n (received image \n, folder to upload \n)\n\n\nThis method is storing image records in \nimages table\n and it also calls \nImage::upload\n helper to upload the image.\n\n\nIt returns last inserted id or null if it fails.\n\n\n\n\ncountTable\n (table to count *, where clause, like clause)\n\n\nThis method counts number of records from table and you can use where or like clause to filter the results.\n\n\nReturns number of rows or null.",
+            "text": "Model\n\n\nm4\\m4mvc\\core\\Model\n\n\nAbstract model class\n is intended to be extended by all the other models.\n\n\nParameters\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nquery\n\n\nHolds Query Helper Instance\n\n\n\n\n\n\ndb\n\n\nHolds database connection\n\n\n\n\n\n\ncredentials\n\n\nDB credentials array, is static\n\n\n\n\n\n\n\n\nTalking With Database\n\n\nThere are 4 important helper methods to run SQL queries. \n\n\n\n\nsave  - insert / update / delete record\n\n\n\n\n\n\nSave method has third optional argument \nlastInsertedId\n which if set to \ntrue\n returns last inserted id. Otherwise it returns boolean of success.\n\n\n\n\n\n\n\n\nfetch - get single row\n\n\n\n\n\n\nfetchAll - get array of results\n\n\n\n\n\n\nrunQuery - run the query\n\n\n\n\n\n\n\n\nFirst 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments \nSQL Query\n and \nArray of Parameters\n. \n\n\n\n\nIf you want to use runQuery directly you need to set third parameter \ntype\n [integer]. \n\n\n\n\n\n\n\n\ntype\n\n\ndescription\n\n\n\n\n\n\n\n\n\n\n1\n\n\nFetch All [Assoc]\n\n\n\n\n\n\n2\n\n\nFetch [Assoc]\n\n\n\n\n\n\n3\n\n\nCreate Update Delete returns boolean\n\n\n\n\n\n\n4\n\n\nCreate Update Delete returns last inserted id\n\n\n\n\n\n\n\n\n// assuming access to extendeding model instance\n\n\n$this->model->save(\"UPDATE users SET name = :name\", ['name' => 'John']);\n\n\n\n$this->model->save(\"DELETE FROM users WHERE name = :name\", ['name' => 'Jan']);\n\n\n\n$this->model->fetch(\"SELECT * FROM users WHERE id = :id\", ['id' => 251]);\n\n\n\n$this->model->fetchAll(\"SELECT * FROM users\");\n\n\n\n\n\n\nOther core methods\n\n\nimage\n (received image \n, folder to upload \n)\n\n\n[this method is experimental and will be changed or removed]\n\n\nThis method is storing image records in \nimages table\n and it also calls \nImage::upload\n helper to upload the image.\n\n\nIt returns last inserted id or null if it fails.\n\n\n\n\ncountTable\n (table to count *, where clause, like clause)\n\n\nThis method counts number of records from table and you can use where or like clause to filter the results.\n\n\nReturns number of rows or null.",
             "title": "Model"
         },
         {
@@ -77,18 +82,103 @@
         },
         {
             "location": "/core/model/#parameters",
-            "text": "Name  Description      query  Holds Query Helper Instance    db  Holds database connection",
+            "text": "Name  Description      query  Holds Query Helper Instance    db  Holds database connection    credentials  DB credentials array, is static",
             "title": "Parameters"
         },
         {
             "location": "/core/model/#talking-with-database",
-            "text": "There are 4 important helper methods to run SQL queries.    save  - insert / update / delete record    Save method has third optional argument  lastInsertedId  which if set to  true  returns last inserted id. Otherwise it returns boolean of success.     fetch - get single row    fetchAll - get array of results    runQuery - run the query     First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments  SQL Query  and  Array of Parameters .    If you want to use runQuery directly you need to set third parameter  type  [integer].      type  description      1  Fetch All [Assoc]    2  Fetch [Assoc]    3  Create Update Delete returns boolean    4  Create Update Delete returns last inserted id",
+            "text": "There are 4 important helper methods to run SQL queries.    save  - insert / update / delete record    Save method has third optional argument  lastInsertedId  which if set to  true  returns last inserted id. Otherwise it returns boolean of success.     fetch - get single row    fetchAll - get array of results    runQuery - run the query     First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments  SQL Query  and  Array of Parameters .    If you want to use runQuery directly you need to set third parameter  type  [integer].      type  description      1  Fetch All [Assoc]    2  Fetch [Assoc]    3  Create Update Delete returns boolean    4  Create Update Delete returns last inserted id     // assuming access to extendeding model instance  $this->model->save(\"UPDATE users SET name = :name\", ['name' => 'John']);  $this->model->save(\"DELETE FROM users WHERE name = :name\", ['name' => 'Jan']);  $this->model->fetch(\"SELECT * FROM users WHERE id = :id\", ['id' => 251]);  $this->model->fetchAll(\"SELECT * FROM users\");",
             "title": "Talking With Database"
         },
         {
             "location": "/core/model/#other-core-methods",
-            "text": "image  (received image  , folder to upload  )  This method is storing image records in  images table  and it also calls  Image::upload  helper to upload the image.  It returns last inserted id or null if it fails.   countTable  (table to count *, where clause, like clause)  This method counts number of records from table and you can use where or like clause to filter the results.  Returns number of rows or null.",
+            "text": "image  (received image  , folder to upload  )  [this method is experimental and will be changed or removed]  This method is storing image records in  images table  and it also calls  Image::upload  helper to upload the image.  It returns last inserted id or null if it fails.   countTable  (table to count *, where clause, like clause)  This method counts number of records from table and you can use where or like clause to filter the results.  Returns number of rows or null.",
             "title": "Other core methods"
+        },
+        {
+            "location": "/helper/string/",
+            "text": "String\n\n\nm4\\m4mvc\\helper\\Str\n\n\nStr\n helper simplifies different string tasks. All methods and properties are static.\n\n\nProperies\n\n\n\n\nlang - array of language strings to be used with \ngetLang\n method\n\n\nurl - array of url's to be used with \ngetUrl\n method\n\n\n\n\nMethods\n\n\n\n\ngetUrl\n\n\nargument\n: \nkey\n\n\ndescription\n: value will be returned based on key in \nHelper::$url\n array. If key is null it will return whole array.\n\n\n\n\ngetLang\n\n\nargument\n: \nkey\n\n\ndescription\n: value will be returned based on key in \nHelper::$lang\n array. If key is null it will return whole array.\n\n\n\n\nslugify\n\n\nargument\n: \nstring\n\n\ndescription\n - Slug will be returned of passed string. (Make me Slug) => (make-me-slug)\n\n\n\n\nremoveAccent\n\n\nargument\n: \nstring\n\n\ndescription\n - Text without accent will be returned (\u010d\u0165\u017e\u00fd\u00e1\u00ed\u00e9) => (ctzyaie)",
+            "title": "String"
+        },
+        {
+            "location": "/helper/string/#string",
+            "text": "m4\\m4mvc\\helper\\Str  Str  helper simplifies different string tasks. All methods and properties are static.",
+            "title": "String"
+        },
+        {
+            "location": "/helper/string/#properies",
+            "text": "lang - array of language strings to be used with  getLang  method  url - array of url's to be used with  getUrl  method",
+            "title": "Properies"
+        },
+        {
+            "location": "/helper/string/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/helper/string/#geturl",
+            "text": "argument :  key  description : value will be returned based on key in  Helper::$url  array. If key is null it will return whole array.",
+            "title": "getUrl"
+        },
+        {
+            "location": "/helper/string/#getlang",
+            "text": "argument :  key  description : value will be returned based on key in  Helper::$lang  array. If key is null it will return whole array.",
+            "title": "getLang"
+        },
+        {
+            "location": "/helper/string/#slugify",
+            "text": "argument :  string  description  - Slug will be returned of passed string. (Make me Slug) => (make-me-slug)",
+            "title": "slugify"
+        },
+        {
+            "location": "/helper/string/#removeaccent",
+            "text": "argument :  string  description  - Text without accent will be returned (\u010d\u0165\u017e\u00fd\u00e1\u00ed\u00e9) => (ctzyaie)",
+            "title": "removeAccent"
+        },
+        {
+            "location": "/helper/query/",
+            "text": "Query\n\n\nm4\\m4mvc\\helper\\Query\n\n\nHelps with task of creating SQL queries. \n\n\n\n\nYou need to create instance before use, but if you extend our core Model, it holds instance of this class in \nquery\n param, so you can access it with \n$this->query\n\n\n\n\nIt works by chaining methods and then using \nbuild()\n as the last one. \n\n\nExample\n\n\n$query = $this->query->select('name', 'age')->from('users')->where('id = :id')->build();\n\n\n\n$query = $this->query->select('t.hash', 'u.name')->from('users u')->join('left', 'tokens t', 't.user_id = u.id')->limit(10)->groupBy('u.name')->orderBy('u.name DESC')->build();\n\n\n\n$query = $this->query->insert('name', 'age')->into('users')->build();\n\n\n\n$query = $this->query->update('users')->set('name', 'age')->where('id = :id');\n\n\n\n$query = $this->query->delete('users')->where('id = :id');\n\n\n\n\n\n\nMethods\n\n\nThere are 4 action types\n\n\n1. select [no argument or column strings]\n\n\nfrom\n specifies table [string]\n\nlimit\n [int or string]\n\njoin\n [type, table, on] [strings]\n\ngroupBy\n column name [string]\n\norderBy\n column name [string], type (ASC / DESC) [string] \n\n\n2. insert [no argument or column strings]\n\n\ninto\n specifies table [string]\n\n\n3. update [table name string]\n\n\nset\n list of columns to update [array]\n\n\n4. delete [table name string]\n\n\nCommon methods\n\n\nwhere\n where block [string], type: 1, 3, 4",
+            "title": "Query"
+        },
+        {
+            "location": "/helper/query/#query",
+            "text": "m4\\m4mvc\\helper\\Query  Helps with task of creating SQL queries.    You need to create instance before use, but if you extend our core Model, it holds instance of this class in  query  param, so you can access it with  $this->query   It works by chaining methods and then using  build()  as the last one.",
+            "title": "Query"
+        },
+        {
+            "location": "/helper/query/#example",
+            "text": "$query = $this->query->select('name', 'age')->from('users')->where('id = :id')->build();  $query = $this->query->select('t.hash', 'u.name')->from('users u')->join('left', 'tokens t', 't.user_id = u.id')->limit(10)->groupBy('u.name')->orderBy('u.name DESC')->build();  $query = $this->query->insert('name', 'age')->into('users')->build();  $query = $this->query->update('users')->set('name', 'age')->where('id = :id');  $query = $this->query->delete('users')->where('id = :id');",
+            "title": "Example"
+        },
+        {
+            "location": "/helper/query/#methods",
+            "text": "There are 4 action types",
+            "title": "Methods"
+        },
+        {
+            "location": "/helper/query/#1-select-no-argument-or-column-strings",
+            "text": "from  specifies table [string] limit  [int or string] join  [type, table, on] [strings] groupBy  column name [string] orderBy  column name [string], type (ASC / DESC) [string]",
+            "title": "1. select [no argument or column strings]"
+        },
+        {
+            "location": "/helper/query/#2-insert-no-argument-or-column-strings",
+            "text": "into  specifies table [string]",
+            "title": "2. insert [no argument or column strings]"
+        },
+        {
+            "location": "/helper/query/#3-update-table-name-string",
+            "text": "set  list of columns to update [array]",
+            "title": "3. update [table name string]"
+        },
+        {
+            "location": "/helper/query/#4-delete-table-name-string",
+            "text": "",
+            "title": "4. delete [table name string]"
+        },
+        {
+            "location": "/helper/query/#common-methods",
+            "text": "where  where block [string], type: 1, 3, 4",
+            "title": "Common methods"
         }
     ]
 }

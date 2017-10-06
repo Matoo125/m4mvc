@@ -16,7 +16,7 @@
     
     
       
-        <title>Model - M4MVC</title>
+        <title>Query - M4MVC</title>
       
     
     
@@ -73,11 +73,11 @@
             
               
                 <span class="md-header-nav__parent">
-                  Core
+                  Helpers
                 </span>
               
             
-            Model
+            Query
           
         </span>
       </div>
@@ -148,12 +148,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       Core
@@ -171,7 +169,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../app/" title="App" class="md-nav__link">
+    <a href="../../core/app/" title="App" class="md-nav__link">
       App
     </a>
   </li>
@@ -183,8 +181,58 @@
 
 
   <li class="md-nav__item">
-    <a href="../controller/" title="Controller" class="md-nav__link">
+    <a href="../../core/controller/" title="Controller" class="md-nav__link">
       Controller
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/model/" title="Model" class="md-nav__link">
+      Model
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Helpers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Helpers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../string/" title="String" class="md-nav__link">
+      String
     </a>
   </li>
 
@@ -204,11 +252,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Model
+        Query
       </label>
     
-    <a href="./" title="Model" class="md-nav__link md-nav__link--active">
-      Model
+    <a href="./" title="Query" class="md-nav__link md-nav__link--active">
+      Query
     </a>
     
       
@@ -222,23 +270,57 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parameters" title="Parameters" class="md-nav__link">
-    Parameters
+  <a href="#example" title="Example" class="md-nav__link">
+    Example
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#talking-with-database" title="Talking With Database" class="md-nav__link">
-    Talking With Database
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-select-no-argument-or-column-strings" title="1. select [no argument or column strings]" class="md-nav__link">
+    1. select [no argument or column strings]
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#other-core-methods" title="Other core methods" class="md-nav__link">
-    Other core methods
+        
+          <li class="md-nav__item">
+  <a href="#2-insert-no-argument-or-column-strings" title="2. insert [no argument or column strings]" class="md-nav__link">
+    2. insert [no argument or column strings]
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-table-name-string" title="3. update [table name string]" class="md-nav__link">
+    3. update [table name string]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-delete-table-name-string" title="4. delete [table name string]" class="md-nav__link">
+    4. delete [table name string]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-methods" title="Common methods" class="md-nav__link">
+    Common methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -248,54 +330,6 @@
   
 </nav>
     
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      Helpers
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        Helpers
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../helper/string/" title="String" class="md-nav__link">
-      String
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../helper/query/" title="Query" class="md-nav__link">
-      Query
-    </a>
   </li>
 
         
@@ -325,23 +359,57 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parameters" title="Parameters" class="md-nav__link">
-    Parameters
+  <a href="#example" title="Example" class="md-nav__link">
+    Example
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#talking-with-database" title="Talking With Database" class="md-nav__link">
-    Talking With Database
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-select-no-argument-or-column-strings" title="1. select [no argument or column strings]" class="md-nav__link">
+    1. select [no argument or column strings]
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#other-core-methods" title="Other core methods" class="md-nav__link">
-    Other core methods
+        
+          <li class="md-nav__item">
+  <a href="#2-insert-no-argument-or-column-strings" title="2. insert [no argument or column strings]" class="md-nav__link">
+    2. insert [no argument or column strings]
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-update-table-name-string" title="3. update [table name string]" class="md-nav__link">
+    3. update [table name string]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-delete-table-name-string" title="4. delete [table name string]" class="md-nav__link">
+    4. delete [table name string]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-methods" title="Common methods" class="md-nav__link">
+    Common methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -360,101 +428,41 @@
               
                 
                 
-                <h1 id="model">Model</h1>
-<p><code>m4\m4mvc\core\Model</code></p>
-<p><a href="https://github.com/Matoo125/M4CMS/blob/master/app/core/Model.php">Abstract model class</a> is intended to be extended by all the other models.</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>query</td>
-<td>Holds Query Helper Instance</td>
-</tr>
-<tr>
-<td>db</td>
-<td>Holds database connection</td>
-</tr>
-<tr>
-<td>credentials</td>
-<td>DB credentials array, is static</td>
-</tr>
-</tbody>
-</table>
-<h3 id="talking-with-database">Talking With Database</h3>
-<p>There are 4 important helper methods to run SQL queries. </p>
-<ol>
-<li>save  - insert / update / delete record</li>
-</ol>
+                <h1 id="query">Query</h1>
+<p><code>m4\m4mvc\helper\Query</code></p>
+<p>Helps with task of creating SQL queries. </p>
 <blockquote>
-<p>Save method has third optional argument <code>lastInsertedId</code> which if set to <code>true</code> returns last inserted id. Otherwise it returns boolean of success.</p>
+<p>You need to create instance before use, but if you extend our core Model, it holds instance of this class in <code>query</code> param, so you can access it with <code>$this-&gt;query</code></p>
 </blockquote>
-<ol>
-<li>
-<p>fetch - get single row</p>
-</li>
-<li>
-<p>fetchAll - get array of results</p>
-</li>
-<li>
-<p>runQuery - run the query</p>
-</li>
-</ol>
-<blockquote>
-<p>First 3 of them are just extending runQuery for simpler use. All of them take first 2 arguments <strong>SQL Query</strong> and <strong>Array of Parameters</strong>. </p>
-</blockquote>
-<p>If you want to use runQuery directly you need to set third parameter <strong>type</strong> [integer]. </p>
-<table>
-<thead>
-<tr>
-<th>type</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Fetch All [Assoc]</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Fetch [Assoc]</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Create Update Delete returns boolean</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Create Update Delete returns last inserted id</td>
-</tr>
-</tbody>
-</table>
-<div class="codehilite"><pre><span></span><span class="x">// assuming access to extendeding model instance</span>
-<span class="x">$this-&gt;model-&gt;save(&quot;UPDATE users SET name = :name&quot;, [&#39;name&#39; =&gt; &#39;John&#39;]);</span>
+<p>It works by chaining methods and then using <code>build()</code> as the last one. </p>
+<h2 id="example">Example</h2>
+<div class="codehilite"><pre><span></span><span class="x">$query = $this-&gt;query-&gt;select(&#39;name&#39;, &#39;age&#39;)-&gt;from(&#39;users&#39;)-&gt;where(&#39;id = :id&#39;)-&gt;build();</span>
 
-<span class="x">$this-&gt;model-&gt;save(&quot;DELETE FROM users WHERE name = :name&quot;, [&#39;name&#39; =&gt; &#39;Jan&#39;]);</span>
+<span class="x">$query = $this-&gt;query-&gt;select(&#39;t.hash&#39;, &#39;u.name&#39;)-&gt;from(&#39;users u&#39;)-&gt;join(&#39;left&#39;, &#39;tokens t&#39;, &#39;t.user_id = u.id&#39;)-&gt;limit(10)-&gt;groupBy(&#39;u.name&#39;)-&gt;orderBy(&#39;u.name DESC&#39;)-&gt;build();</span>
 
-<span class="x">$this-&gt;model-&gt;fetch(&quot;SELECT * FROM users WHERE id = :id&quot;, [&#39;id&#39; =&gt; 251]);</span>
+<span class="x">$query = $this-&gt;query-&gt;insert(&#39;name&#39;, &#39;age&#39;)-&gt;into(&#39;users&#39;)-&gt;build();</span>
 
-<span class="x">$this-&gt;model-&gt;fetchAll(&quot;SELECT * FROM users&quot;);</span>
+<span class="x">$query = $this-&gt;query-&gt;update(&#39;users&#39;)-&gt;set(&#39;name&#39;, &#39;age&#39;)-&gt;where(&#39;id = :id&#39;);</span>
+
+<span class="x">$query = $this-&gt;query-&gt;delete(&#39;users&#39;)-&gt;where(&#39;id = :id&#39;);</span>
 </pre></div>
 
 
-<h3 id="other-core-methods">Other core methods</h3>
-<p><strong>image</strong> (received image <em>, folder to upload </em>)</p>
-<p>[this method is experimental and will be changed or removed]</p>
-<p>This method is storing image records in <code>images table</code> and it also calls <code>Image::upload</code> helper to upload the image.</p>
-<p>It returns last inserted id or null if it fails.</p>
-<hr />
-<p><strong>countTable</strong> (table to count *, where clause, like clause)</p>
-<p>This method counts number of records from table and you can use where or like clause to filter the results.</p>
-<p>Returns number of rows or null.</p>
+<h2 id="methods">Methods</h2>
+<p>There are 4 action types</p>
+<h4 id="1-select-no-argument-or-column-strings">1. select [no argument or column strings]</h4>
+<p><strong>from</strong> specifies table [string]
+<strong>limit</strong> [int or string]
+<strong>join</strong> [type, table, on] [strings]
+<strong>groupBy</strong> column name [string]
+<strong>orderBy</strong> column name [string], type (ASC / DESC) [string] </p>
+<h4 id="2-insert-no-argument-or-column-strings">2. insert [no argument or column strings]</h4>
+<p><strong>into</strong> specifies table [string]</p>
+<h4 id="3-update-table-name-string">3. update [table name string]</h4>
+<p><strong>set</strong> list of columns to update [array]</p>
+<h4 id="4-delete-table-name-string">4. delete [table name string]</h4>
+<h4 id="common-methods">Common methods</h4>
+<p><strong>where</strong> where block [string], type: 1, 3, 4</p>
                 
                   
                 
@@ -473,7 +481,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../controller/" title="Controller" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../string/" title="String" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -482,25 +490,11 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Controller
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../../helper/string/" title="String" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
                 String
               </span>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
           </a>
+        
         
       </nav>
     </div>
