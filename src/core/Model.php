@@ -9,6 +9,8 @@ abstract class Model
 {
   // Db credentials array
   public static $credentials;
+  // Db adapter string
+  public static $adapter = 'mysql';
   // Query helper object
   public $query;
   // DB connection object
@@ -27,14 +29,19 @@ abstract class Model
 
     if ($db === null) {
       try {
-        $dns = 'mysql:host=' . self::$credentials['DB_HOST'] . 
-           ';dbname=' . self::$credentials['DB_NAME'] . 
-           ';charset=utf8';
+        if (self::$adapter === 'sqlite') {
+          $db = new \PDO("sqlite:" . self::$credentials['path']);
+        }
+        else {
+          $dns = 'mysql:host=' . self::$credentials['DB_HOST'] . 
+             ';dbname=' . self::$credentials['DB_NAME'] . 
+             ';charset=utf8';
 
-        $db = new \PDO($dns, 
-          self::$credentials['DB_USER'], 
-          self::$credentials['DB_PASSWORD']
-        );
+          $db = new \PDO($dns, 
+            self::$credentials['DB_USER'], 
+            self::$credentials['DB_PASSWORD']
+          );
+        }
 
         $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         return $db;
