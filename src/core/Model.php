@@ -148,4 +148,42 @@ abstract class Model
     $result = $stmt->fetch();
     return $result ? $result[0] : null;
   }
+
+
+  /* new functions - experimental */
+  public function add ($data)
+  {
+    $q = $this->query->insert(...array_keys($data))->into(static::$table);
+    return $this->save($q->build(), $data, true);
+  }
+
+  public function list ($filters = [])
+  {
+    $q = $this->query->select()
+                     ->from(static::$table)
+                     ->where(array_keys($filters));
+    return $this->fetchAll($q->build(), $filters);
+  }
+
+  public function find ($filters)
+  {
+    $q = $this->query->select()
+                     ->from(static::$table);
+    $where = [];
+    foreach ($filters as $key => $value) {
+      $where[] =  $key . " = :" . $key . " "; 
+    }
+    $q->where(implode(' AND ', $where));
+    return $this->fetch($q->build(), $filters);
+  }
+
+  public function getColumnNames ($table = null)
+  {
+    $table = $table ?? static::$table;
+    $columns = $this->fetchAll("DESCRIBE " . $table);
+    return $columns;
+  }
+
+
+  /* end of new functions */
 }

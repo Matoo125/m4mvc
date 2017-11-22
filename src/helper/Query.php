@@ -22,6 +22,8 @@ class Query
     private $groupBy;
     private $orderBy = array();
 
+    private $insertSubqueries = array();
+
     public function select()
     {
         $this->columns = func_get_args();
@@ -32,6 +34,11 @@ class Query
     {
       $this->columns = func_get_args();
       $this->action = 2;
+      return $this;
+    }
+    public function insertSubquery (array $subquery)
+    {
+      $this->insertSubqueries = array_merge($this->insertSubqueries, $subquery);
       return $this;
     }
     public function update($table)
@@ -58,7 +65,15 @@ class Query
     }
     public function where($where)
     {
-      $this->where = $where;
+      if (is_array($where)) {
+       foreach ($where as $key) {
+         $where[$key] = $key . " = :" . $key . " ";
+       }
+       $this->where = implode(' AND ', $where);
+      }
+      else if(is_string($where)) {
+        $this->where = $where;
+      }
       return $this;
     }
     public function limit($limit)
@@ -132,9 +147,24 @@ class Query
           break;
         // insert
         case 2:
+          $subqueries = [
+              'columns' => (
+                $this->insertSubqueries ?
+                ', ' . implode(',', array_keys($this->insertSubqueries)) : ''
+              ),
+              'values' => ($this->insertSubqueries ? 
+                      ', ' . implode(', ', $this->insertSubqueries) : '')
+          ];
+          
           $query = "INSERT INTO " . $this->table . " ";
-          $query .= "(" . implode(', ', $this->columns) . ") ";
-          $query .= "VALUES (:" . implode(', :', $this->columns) . ") ";
+          $query .= "(" . 
+                      implode(', ', $this->columns) . 
+                      $subqueries['columns'] .
+                    ") ";
+          $query .= "VALUES (:" . 
+                     implode(', :', $this->columns) . 
+                     $subqueries['values'] .
+                     ") ";
           return $query;
         // update
         case 3:

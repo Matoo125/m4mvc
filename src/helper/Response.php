@@ -22,7 +22,7 @@ class Response
 		self::$code = $code;
 	}
 
-	public static function error ($message, $extra = [], $code = 404)
+	public static function error ($message, $extra = [], $code = null)
 	{
 		self::$code = $code ?? self::$errorCode;
 		self::create('ERROR', $message, $extra);
