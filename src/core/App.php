@@ -76,7 +76,7 @@ class App
     return $class;
   }
 
-  private function setController($url)
+  protected function setController($url)
   { 
     if ($url) $url = $this->findControllerInUrl($url);
 
@@ -101,7 +101,7 @@ class App
     return $url;
   }
 
-  private function callMethod($url)
+  protected function callMethod($url)
   {
     // set the method 
     if (isset($url[0]) && method_exists($this->instance, $url[0])) {
@@ -138,7 +138,7 @@ class App
     $this->instance->pathToTheme = $view;
 
     $view .= ucfirst($this->controller) . DIRECTORY_SEPARATOR .
-             $this->method . '.' . $this->settings['viewExtension'];
+             ucfirst($this->method) . '.' . $this->settings['viewExtension'];
 
     call_user_func_array(
       [$this->instance, $this->settings['renderFunction']], 
