@@ -35,18 +35,18 @@ class Controller
 			$view = $this->view;
 		}
 		///////////////// DECLARE TWIG INSTANCE /////////////////
-		$loader = new \Twig_Loader_Filesystem($this->pathToTheme);
-		$twig = new \Twig_Environment(
+		$loader = new \Twig\Loader\FilesystemLoader($this->pathToTheme);
+		$twig = new \Twig\Environment(
 			$loader, 
 			array(
 		  	'debug' => true,
 			)
 		);
-		$twig->addExtension(new \Twig_Extension_Debug());
+		$twig->addExtension(new \Twig\Extension\DebugExtension());
 		///////////////// ADD GLOBALS /////////////////
 		$twig->addGlobal("session", $_SESSION);
 		///////////////// Create filters /////////////////
-		$slugifilter = new \Twig_Filter(
+		$slugifilter = new \Twig\TwigFilter(
 			'slugify', 
 			'\\m4\\m4mvc\\helper\\Str::slugify'
 		);
